@@ -93,4 +93,14 @@ const handleQuestionSubmit = async (User) => {
     }
   }
 }
-export { getData, shuffle, handleData, handleQuestion, handleQuestionSubmit }
+// to check the path of user
+const checkUserPath =async(email) =>{
+  const newpath =await getData("users",email)
+      console.log(newpath.path);
+      if(newpath.path.length>0){
+        return true;
+      }else{
+        return false;
+      }
+}
+export { getData, shuffle, handleData, handleQuestion, handleQuestionSubmit ,checkUserPath }

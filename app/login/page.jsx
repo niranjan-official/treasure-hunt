@@ -9,7 +9,7 @@ import { useGlobalContext } from '../context/context'
 
 export default function Home() {
 
-  const {setUser} = useGlobalContext()
+  const {load,setLoad} = useGlobalContext()
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -20,17 +20,14 @@ export default function Home() {
     signInWithEmailAndPassword(auth, email, password)
       .then(async(userCredential) => {
         console.log(userCredential);
-        const newpath =await getData("users",email)
-        setUser({
-          name: userCredential.user.displayName,
-          email: email
-        })
-        console.log(newpath.path);
-        if(newpath.path.length>0){
-          router.push("/scan")
-        }else{
-          router.push("/instruction")
-        }
+        router.push("/instruction")
+        // const newpath =await getData("users",email)
+        // console.log(newpath.path);
+        // if(newpath.path.length>0){
+        //   router.push("/scan")
+        // }else{
+        //   router.push("/instruction")
+        // }
         // ...
       })
       .catch((error) => {
