@@ -1,57 +1,85 @@
 'use client'
-import React from 'react'
-import { getData } from '../functions'
+import React, { useContext, useEffect } from 'react'
+import { shuffle } from '../functions'
+import { useRouter } from 'next/navigation'
+import { doc, updateDoc } from 'firebase/firestore'
+import { db } from '@/firebase/config'
+import { useGlobalContext } from '../context/context'
+import { useAuth } from '@/firebase/auth'
 
 const Instruction = () => {
 
-    const handleStart=async()=>{
-        const userData =await getData("users","niranjan@gmail.com");
-        const question =await getData("Questions",userData.path[0]);
-        const randomIndex = Math.floor(Math.random() * 3)+1;
-        const ques = {"question":question[randomIndex],"answer":question[`${randomIndex}a`]};
-        console.log(ques);
-    }
-  return (
-    <div className='w-screen h-screen flex justify-center items-center bg-lime-100'>
-      <div className='flex flex-col p-4 bg-white rounded-lg w-1/2 text-gray-500 text-sm'>
-        <h1 className='text-3xl text-lime-900 text-center'>Instructions</h1>
+  const router = useRouter()
+  const { user } = useGlobalContext()
 
-<h5 className='mt-4'>Use the QR code scanner to scan QR codes placed around the campus.
-Pay attention to the instructions or content provided when scanning QR codes.</h5>
+  const User = useAuth()
+  useEffect(()=>{
+    console.log(User);
+  },[User])
 
-
-<h5 className='mt-4'>Each team will have a unique set of QR code locations to visit.
-Stick to your designated pathway and don't deviate.</h5>
-
-
-<h5 className='mt-4'>Some QR codes may contain clues or riddles that lead to the next location.
-Work together with your team to decipher them.</h5>
-
-
-<h5 className='mt-4'>Be prepared to encounter hidden challenges or mini-games at certain locations.
-Complete these tasks to earn bonus points or unlock the next clue.</h5>
-
-
-<h5 className='mt-4'>Time is of the essence. The team that completes the hunt in the shortest time wins.
-Keep an eye on the clock and strategize your moves.</h5>
-
-
-<h5 className='mt-4'>Navigate the interactive map on the website to help you find QR code positions.
-Access your user dashboard to monitor your progress and view the leaderboard.</h5>
-
-
-<h5 className='mt-4'>Communicate with your team members and competitors through the in-game messaging system.
-Use it for coordination and strategy.</h5>
-
-
-<h5 className='mt-4'>Personalize your avatar through your user profile on the website.
-Make your team stand out.</h5>
-
-
-<button onClick={handleStart} className='button'>Start the Hunt</button>
+  const handleStart = async () => {
+    console.log(User);
+    const path = await shuffle("abcd");
+    console.log(path);
+    const array = path.split('');
+    const washingtonRef = doc(db, "users", User.email);
+    await updateDoc(washingtonRef, {
+      path: array,
+      startTime: new Date()
+    }).then(() => {
+      router.push("/scan")
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
+  if(User){
+    return (
+      <div className='w-screen h-screen flex justify-center items-center bg-lime-200 p-3'>
+        <div className='flex flex-col p-4 bg-white rounded-lg lg:w-1/2 w-full text-gray-500 text-sm'>
+          <div className='w-full flex justify-center items-center gap-1 text-lime-900'>
+            <h1 className='text-3xl text-center'>Instructions</h1>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+            </svg>
+  
+          </div>
+          <h5 className='mt-4'>• Use the QR code scanner to scan QR codes placed around the campus.
+            Pay attention to the instructions or content provided when scanning QR codes.</h5>
+  
+  
+          <h5 className='mt-4'>• Each team will have a unique set of QR code locations to visit.
+            Stick to your designated pathway and don't deviate.</h5>
+  
+  
+          <h5 className='mt-4'>• Some QR codes may contain clues or riddles that lead to the next location.
+            Work together with your team to decipher them.</h5>
+  
+  
+          <h5 className='mt-4'>• Be prepared to encounter hidden challenges or mini-games at certain locations.
+            Complete these tasks to earn bonus points or unlock the next clue.</h5>
+  
+  
+          <h5 className='mt-4'>• Time is of the essence. The team that completes the hunt in the shortest time wins.
+            Keep an eye on the clock and strategize your moves.</h5>
+  
+  
+          <h5 className='mt-4'>• Navigate the interactive map on the website to help you find QR code positions.
+            Access your user dashboard to monitor your progress and view the leaderboard.</h5>
+  
+  
+          <h5 className='mt-4'>• Communicate with your team members and competitors through the in-game messaging system.
+            Use it for coordination and strategy.</h5>
+  
+  
+          <h5 className='mt-4'>• Personalize your avatar through your user profile on the website.
+            Make your team stand out.</h5>
+  
+  
+          <button onClick={handleStart} className='button'>Start the Hunt</button>
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 export default Instruction
