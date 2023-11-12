@@ -1,8 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import { getData, handleQuestion, handleQuestionSubmit } from '../functions';
-import { doc, updateDoc } from 'firebase/firestore';
-import { db } from '@/firebase/config';
+import { handleQuestion, handleQuestionSubmit } from '../functions';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/firebase/auth';
 
@@ -34,24 +32,7 @@ const Question = () => {
       } else {
         alert("Got Error")
       }
-      //   const newPath = data.path
-      //   for (let i = 0; i < 4; i++) {
-      //     let c = newPath[i];
-      //     if (data[c] === false) {
-
-      //       const washingtonRef = doc(db, "users",user.email);
-      //       await updateDoc(washingtonRef, {
-      //         [c]:true
-      //       }).then(() => {
-      //         router.push("/scan")
-      //       }).catch((err) => {
-      //         console.log(err);
-      //       })
-      //       break;
-      //     }
-      //   }
-    }
-    else {
+    }else {
       alert("incorrect answer");
     }
   }

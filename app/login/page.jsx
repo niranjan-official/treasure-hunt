@@ -3,8 +3,8 @@ import { auth } from '@/firebase/config'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
-import { getData, getPath } from '../functions'
+import { useState } from 'react'
+import { getData } from '../functions'
 import { useGlobalContext } from '../context/context'
 
 export default function Home() {

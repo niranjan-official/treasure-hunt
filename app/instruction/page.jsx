@@ -1,16 +1,14 @@
 'use client'
-import React, { useContext, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { shuffle } from '../functions'
 import { useRouter } from 'next/navigation'
 import { doc, updateDoc } from 'firebase/firestore'
 import { db } from '@/firebase/config'
-import { useGlobalContext } from '../context/context'
 import { useAuth } from '@/firebase/auth'
 
 const Instruction = () => {
 
   const router = useRouter()
-  const { user } = useGlobalContext()
 
   const User = useAuth()
   useEffect(()=>{
