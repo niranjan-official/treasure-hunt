@@ -4,9 +4,9 @@ import { useGlobalContext } from '../context/context'
 const Complete = () => {
 
   return (
-    <div className='w-screen h-screen bg-lime-200 flex flex-col items-center justify-center text-4xl text-lime-950'>
+    <div className='h-screen primary-bg text-4xl text-lime-950 p-3 text-center'>
         <h1>Congratulations...</h1>
-        <h2>You have completed the game</h2>
+        <h2>You have completed the game !!!</h2>
     </div>
   )
 }

@@ -55,7 +55,7 @@ const handleData = async () => {
   for (let i = 0; i < 4; i++) {
     let c = newPath[i];
     if (userData[c] === false) {
-      const obj = { hint: hint[c], level: i + 1 }
+      const obj = { hint: hint[c], level: i + 1 ,userName: userData.name}
       return obj;
     }
   }
@@ -67,7 +67,7 @@ const handleQuestion = async (User) => {
   const question = await getData("Questions", 'a');
   console.log(question);
   const randomIndex = Math.floor(Math.random() * 3) + 1;
-  const obj = { question: question[randomIndex], answer: question[`${randomIndex}a`] };
+  const obj = { question: question[randomIndex], answer: question[`${randomIndex}a`],userName: userData.name };
   console.log(obj);
   return obj;
 }

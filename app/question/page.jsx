@@ -4,25 +4,27 @@ import { handleQuestion, handleQuestionSubmit } from '../functions';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/firebase/auth';
 import { useGlobalContext } from '../context/context';
-import Loading from '../loading';
+import Loading from '../components/loading';
+import Header from '../components/header';
 
 const Question = () => {
 
-  const [que, setQue] = useState({ question: "", answer: "" })
+  const [que, setQue] = useState({ question: "", answer: "" ,userName: ""})
   const [answer, setAnswer] = useState("")
   const User = useAuth()
-  const {load, setLoad} = useGlobalContext()
+  const { load, setLoad } = useGlobalContext()
 
   const router = useRouter()
   useEffect(() => {
     setLoad(true)
     const fetchQuestion = async () => {
       const question = await handleQuestion(User)
-      setQue({ question: question.question, answer: question.answer })
+      setQue({ question: question.question, answer: question.answer ,userName: question.userName})
       setLoad(false)
     }
     // console.log(User);
     if (User) {
+      console.log(User);
       fetchQuestion()
     }
   }, [User])
@@ -37,23 +39,26 @@ const Question = () => {
       } else {
         alert("Got Error")
       }
-    }else {
+    } else {
       alert("incorrect answer");
     }
   }
   if (User) {
-    if(!load){
+    if (!load) {
       return (
-        <div className='w-screen h-screen flex items-center justify-center bg-lime-200 p-4'>
-          <div className='lg:w-1/2 w-full bg-white rounded-md p-4 flex flex-col'>
-            <h3 className='text-lime-900 text-xl font-serif'>Q. {que.question}</h3>
-            <input value={answer} onChange={(e) => setAnswer(e.target.value)} className='input w-3/4 p-1 mt-5' type="text" placeholder='Answer' />
-            <button onClick={handleSubmit} className='mt-4 button'>Submit</button>
+        <div className='h-screen flex flex-col'>
+          <Header UserName={que.userName}/>
+          <div className='h-full primary-bg p-4'>
+            <div className='lg:w-1/2 w-full bg-white rounded-md p-4 flex flex-col'>
+              <h3 className='text-lime-900 text-xl font-serif'>Q. {que.question}</h3>
+              <input value={answer} onChange={(e) => setAnswer(e.target.value)} className='input w-3/4 p-1 mt-5' type="text" placeholder='Answer' />
+              <button onClick={handleSubmit} className='mt-4 button'>Submit</button>
+            </div>
           </div>
         </div>
       )
-    }else{
-      return <Loading/>
+    } else {
+      return <Loading />
     }
   }
 }

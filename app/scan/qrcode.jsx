@@ -30,7 +30,7 @@ const Qrcode = () => {
     },[])
     return (
         <div>
-           <div id='reader'></div>
+           <div id='reader' className='flex items-center justify-center font-serif p-4'></div>
         </div>
             
     )

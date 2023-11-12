@@ -21,14 +21,6 @@ export default function Home() {
       .then(async(userCredential) => {
         console.log(userCredential);
         router.push("/instruction")
-        // const newpath =await getData("users",email)
-        // console.log(newpath.path);
-        // if(newpath.path.length>0){
-        //   router.push("/scan")
-        // }else{
-        //   router.push("/instruction")
-        // }
-        // ...
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -39,11 +31,11 @@ export default function Home() {
     // router.push("/instruction")
   }
   return (
-    <div className='w-screen h-screen flex items-center justify-center bg-lime-200'>
+    <div className='h-screen primary-bg'>
       <div className='p-8 flex flex-col items-center rounded-md shadow-md bg-white'>
-        <h1 className='mb-4 text-4xl font-serif font-bold text-lime-900'>Login</h1>
-        <input value={email} className='input' onChange={(e) => setEmail(e.target.value)} type="email" placeholder='Email' />
-        <input value={password} className='input' onChange={(e) => setPassword(e.target.value)} type="password" placeholder='Password' />
+        <h1 className='mb-4 text-4xl font-serif font-bold text-green-950'>Login</h1>
+        <input value={email} className='input' autoComplete='off' onChange={(e) => setEmail(e.target.value)} type="email" placeholder='Email' />
+        <input value={password} className='input' autoComplete='off' onChange={(e) => setPassword(e.target.value)} type="password" placeholder='Password' />
         <div className="flex w-full justify-between text-xs mt-4 text-lime-800">
           <div className='flex'>
             <input type="checkbox" className='bg-lime-800' />
@@ -51,7 +43,7 @@ export default function Home() {
           </div>
           <Link href="/signup" className='cursor-pointer ml-8'>Create new Account?</Link>
         </div>
-        <button onClick={handleSubmit} className='p-3 bg-lime-800 text-white rounded-xl mt-4 font-semibold text-sm hover:bg-lime-900'>LOGIN</button>
+        <button onClick={handleSubmit} className='button'>LOGIN</button>
       </div>
     </div>
   )

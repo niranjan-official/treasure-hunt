@@ -3,10 +3,13 @@
 @tailwind utilities;
 
 .input{
-  @apply w-full p-2 pl-0 border-b-2 border-lime-800 focus:outline-none
+  @apply w-full p-2 pl-0 border-b-2 border-b-green-900 focus:outline-none
 }
 .button{
-  @apply p-3 text-white bg-lime-800 font-semibold rounded-lg mt-5 font-serif hover:bg-lime-900
+  @apply p-3 text-white bg-green-900 font-semibold rounded-lg mt-5 font-serif hover:bg-green-950
+}
+.primary-bg{
+  @apply w-screen flex flex-col items-center justify-center bg-stone-200
 }
 input:checked{
   background-color: green;
