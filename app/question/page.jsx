@@ -3,23 +3,31 @@ import React, { useEffect, useState } from 'react'
 import { handleQuestion, handleQuestionSubmit } from '../functions';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/firebase/auth';
-import { useGlobalContext } from '../context/context';
-import Loading from '../components/loading';
-import Header from '../components/header';
+import { useGlobalContext } from '../context';
+import Loading from '../../components/loading';
+import Header from '../../components/header';
 
 const Question = () => {
 
-  const [que, setQue] = useState({ question: "", answer: "" ,userName: ""})
+  const [que, setQue] = useState({ question: "", answer: "", userName: "" })
   const [answer, setAnswer] = useState("")
   const User = useAuth()
-  const { load, setLoad } = useGlobalContext()
+  const { load, setLoad, scan, setScan } = useGlobalContext()
 
   const router = useRouter()
+
+  useEffect(() => {
+    if (!scan) {
+      router.push("/scan");
+    } else {
+      setScan(false)
+    }
+  }, [])
   useEffect(() => {
     setLoad(true)
     const fetchQuestion = async () => {
       const question = await handleQuestion(User)
-      setQue({ question: question.question, answer: question.answer ,userName: question.userName})
+      setQue({ question: question.question, answer: question.answer, userName: question.userName })
       setLoad(false)
     }
     // console.log(User);
@@ -31,7 +39,9 @@ const Question = () => {
 
   const handleSubmit = async () => {
 
-    if (answer === que.answer) {
+    let LowerCaseAnswer = answer.toLocaleLowerCase();
+    let Answer = LowerCaseAnswer.replace(/\s/g, "");
+    if (Answer === que.answer) {
       alert("Correct answer");
       const state = await handleQuestionSubmit(User)
       if (state) {
@@ -47,7 +57,7 @@ const Question = () => {
     if (!load) {
       return (
         <div className='h-screen flex flex-col'>
-          <Header UserName={que.userName}/>
+          <Header UserName={que.userName} />
           <div className='h-full primary-bg p-4'>
             <div className='lg:w-1/2 w-full bg-white rounded-md p-4 flex flex-col'>
               <h3 className='text-lime-900 text-xl font-serif'>Q. {que.question}</h3>

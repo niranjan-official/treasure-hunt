@@ -5,24 +5,24 @@ import { useState } from 'react'
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from '@/firebase/config';
 import { doc, setDoc } from 'firebase/firestore';
-import { useGlobalContext } from '../context/context';
-import Loading from '../components/loading';
+import { useGlobalContext } from '../context';
+import Loading from '../../components/loading';
 
 export default function Signup() {
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const {load,setLoad} = useGlobalContext()
+    const { load, setLoad } = useGlobalContext()
 
 
     const router = useRouter()
 
     const handleSubmit = () => {
         createUserWithEmailAndPassword(auth, email, password)
-        .then(async(userCredential) =>{
-            userCredential.user.displayName=name;
-            setLoad(true);
+            .then(async (userCredential) => {
+                userCredential.user.displayName = name;
+                setLoad(true);
                 // const user = userCredential.user;
                 await setDoc(doc(db, "users", email), {
                     name: name,
@@ -33,21 +33,21 @@ export default function Signup() {
                     path: [],
                     startTime: new Date(),
                     endTime: new Date(),
-                  }).then(()=>{
-                      router.push("/instruction")
-                  }).catch((err)=>{
-                    alert("Signup Failed")
-                  })
+                }).then(() => {
+                    router.push("/instruction")
+                }).catch((err) => {
+                    alert("Signup Failed, Try Again")
+                })
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                console.log("Error",error);
+                console.log("Error", error);
                 // ..
             });
 
     }
-    if(!load){
+    if (!load) {
         return (
             <div className='h-screen primary-bg'>
                 <div className='p-8 flex flex-col items-center rounded-md shadow-md bg-white'>
@@ -66,7 +66,7 @@ export default function Signup() {
                 </div>
             </div>
         )
-    }else{
-        return <Loading/>
+    } else {
+        return <Loading />
     }
 }

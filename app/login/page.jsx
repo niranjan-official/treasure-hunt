@@ -4,12 +4,8 @@ import { signInWithEmailAndPassword } from 'firebase/auth'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import { getData } from '../functions'
-import { useGlobalContext } from '../context/context'
 
 export default function Home() {
-
-  const {load,setLoad} = useGlobalContext()
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -18,17 +14,17 @@ export default function Home() {
 
   const handleSubmit = () => {
     signInWithEmailAndPassword(auth, email, password)
-      .then(async(userCredential) => {
+      .then(async (userCredential) => {
         console.log(userCredential);
         router.push("/instruction")
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(error);
+        console.log(errorCode);
+        alert("Login Failed, Try Again !!");
       });
 
-    // router.push("/instruction")
   }
   return (
     <div className='h-screen primary-bg'>

@@ -4,19 +4,22 @@ import { handleData } from '../functions'
 import { useAuth } from '@/firebase/auth'
 import { useRouter } from 'next/navigation'
 import Qrcode from './qrcode'
-import Loading from '../components/loading'
-import { useGlobalContext } from '../context/context'
-import Header from '../components/header'
+import Loading from '../../components/loading'
+import { useGlobalContext } from '../context'
+import Header from '../../components/header'
 
 const Scan = () => {
+
     const router = useRouter()
     const [hint, setHint] = useState({})
     const { load, setLoad } = useGlobalContext()
     const User = useAuth()
+
+
     useEffect(() => {
         const fetchData = async () => {
             setLoad(true)
-            const obj = await handleData();
+            const obj = await handleData(User.email);
             if (obj !== "completed") {
                 console.log(obj);
                 setHint({
@@ -30,15 +33,18 @@ const Scan = () => {
                 router.push("/completion")
             }
         }
-        fetchData();
-    }, [])
+        if (User) {
+            console.log(User);
+            fetchData();
+        }
+    }, [User])
 
     // If you want to prefer front camera
     if (User) {
         if (!load) {
             return (
                 <div className='h-screen flex flex-col'>
-                    <Header UserName={hint.userName}/>
+                    <Header UserName={hint.userName} />
                     <div className='h-full primary-bg p-3'>
                         <div className='flex flex-col items-center bg-white rounded-lg p-4 shadow-md'>
                             <h2 className='text-green-900 text-3xl font-sans border-b-2 border-green-950'>Level: {hint.level}</h2>

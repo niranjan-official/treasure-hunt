@@ -24,11 +24,10 @@ const shuffle = (inputString) => {
   return array.join('');
 }
 // To fetch hint from firebase based on pathway
-const handleData = async () => {
+const handleData = async (email) => {
 
-  const User = getAuth()
   const hint = await getData("Questions", "hint");
-  const userData = await getData("users", User.currentUser.email);
+  const userData = await getData("users", email);
   const newPath = userData.path
   console.log(hint);
   console.log(newPath);
@@ -55,7 +54,7 @@ const handleData = async () => {
   for (let i = 0; i < 4; i++) {
     let c = newPath[i];
     if (userData[c] === false) {
-      const obj = { hint: hint[c], level: i + 1 ,userName: userData.name}
+      const obj = { hint: hint[c], level: i + 1, userName: userData.name }
       return obj;
     }
   }
@@ -67,7 +66,7 @@ const handleQuestion = async (User) => {
   const question = await getData("Questions", 'a');
   console.log(question);
   const randomIndex = Math.floor(Math.random() * 3) + 1;
-  const obj = { question: question[randomIndex], answer: question[`${randomIndex}a`],userName: userData.name };
+  const obj = { question: question[randomIndex], answer: question[`${randomIndex}a`], userName: userData.name };
   console.log(obj);
   return obj;
 }
@@ -94,13 +93,13 @@ const handleQuestionSubmit = async (User) => {
   }
 }
 // to check the path of user
-const checkUserPath =async(email) =>{
-  const newpath =await getData("users",email)
-      console.log(newpath.path);
-      if(newpath.path.length>0){
-        return true;
-      }else{
-        return false;
-      }
+const checkUserPath = async (email) => {
+  const newpath = await getData("users", email)
+  console.log(newpath.path);
+  if (newpath.path.length > 0) {
+    return true;
+  } else {
+    return false;
+  }
 }
-export { getData, shuffle, handleData, handleQuestion, handleQuestionSubmit ,checkUserPath }
+export { getData, shuffle, handleData, handleQuestion, handleQuestionSubmit, checkUserPath }
