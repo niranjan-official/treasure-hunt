@@ -49,18 +49,18 @@ export default function Signup() {
     }
     if (!load) {
         return (
-            <div className='h-screen primary-bg'>
-                <div className='p-8 flex flex-col items-center rounded-md shadow-md bg-white'>
-                    <h1 className='mb-4 text-4xl font-serif font-bold text-green-900'>Signup</h1>
+            <div className='h-screen primary-bg login'>
+                <div className='p-8 flex flex-col items-center rounded-md  '>
+                    <h1 className='mb-2 text-5xl font-serif font-bold text-orange-950'>Signup</h1>
                     <input value={name} className='input' onChange={(e) => setName(e.target.value)} type="text" placeholder='Username' />
                     <input value={email} className='input' onChange={(e) => setEmail(e.target.value)} type="email" placeholder='Email' />
                     <input value={password} className='input' onChange={(e) => setPassword(e.target.value)} type="password" placeholder='Password' />
-                    <div className="flex w-full justify-between text-xs mt-4 text-lime-800">
+                    <div className="flex w-full justify-between text-xs mt-4 text-orange-950">
                         <div className='flex'>
-                            <input type="checkbox" className='bg-green-800' />
-                            <span className='ml-1 text-green-800'>remember me</span>
+                            <input type="checkbox" className='bg-orange-950' />
+                            <span className='ml-1 text-orange-950'>remember me</span>
                         </div>
-                        <Link href="/login" className='cursor-pointer ml-8 text-green-900'>Already have an account?</Link>
+                        <Link href="/login" className='cursor-pointer ml-8 text-orange-950'>Already have an account?</Link>
                     </div>
                     <button onClick={handleSubmit} className='button'>SIGNUP</button>
                 </div>

@@ -2,12 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+.bg-color{
+  background-color: #090091;
+}
 .input {
-  @apply w-full p-2 pl-0 border-b-2 border-b-green-900 focus:outline-none
+  @apply w-full p-2 rounded-xl mt-4 border-b-2 border-b-orange-950 focus:outline-none placeholder:text-orange-900 placeholder:text-opacity-50
 }
 
 .button {
-  @apply p-3 text-white bg-green-900 font-semibold rounded-lg mt-5 font-serif hover:bg-green-950
+  @apply p-3 text-white bg-orange-950 font-semibold rounded-xl mt-5 font-serif hover:bg-green-950
 }
 
 .primary-bg {
@@ -16,4 +19,9 @@
 
 input:checked {
   background-color: green;
+}
+.login{
+  background: url("./images/bg.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
 }

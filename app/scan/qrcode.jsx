@@ -14,7 +14,7 @@ const Qrcode = () => {
                 width: 100,
                 height: 100
             },
-            fps: 5,
+            fps: 50,
         })
         scanner.render(success, error);
 

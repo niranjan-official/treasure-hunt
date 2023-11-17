@@ -51,16 +51,16 @@ const Instruction = () => {
   if (User) {
     if (!load) {
       return (
-        <div className=' h-screen primary-bg p-4 pb-0 pt-0'>
-          <div className='flex flex-col p-4 bg-white rounded-lg lg:w-1/2 w-full text-gray-500 text-sm'>
-            <div className='w-full flex justify-center items-center gap-1 text-green-900'>
+        <div className=' h-screen primary-bg p-4 pb-0 pt-0 login'>
+          <div className='flex flex-col p-4 rounded-lg lg:w-1/2 w-full text-orange-900 text-sm'>
+            <div className='w-full flex justify-center items-center gap-1 text-orange-950'>
               <h1 className='text-3xl text-center'>Instructions</h1>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
               </svg>
 
             </div>
-            <div className='text-xs'>
+            <div className='text-xs '>
               <h5 className='mt-4'>• Use the QR code scanner to scan QR codes placed around the campus.
                 Pay attention to the instructions or content provided when scanning QR codes.</h5>
 
