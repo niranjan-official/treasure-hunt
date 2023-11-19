@@ -4,7 +4,6 @@ import { signInWithEmailAndPassword } from 'firebase/auth'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import bg from "../images/bg.svg"
 
 export default function Home() {
 

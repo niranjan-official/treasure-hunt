@@ -1,14 +1,13 @@
 'use client'
 import Image from 'next/image'
 import React from 'react'
-import login from "./images/login.svg"
 import Link from 'next/link'
-
+import treasureBox from "../public/images/login.svg"
 const Home = () => {
     return (
         <div className='w-screen h-screen bg-color'>
             <div className='w-full h-1/2'>
-                <Image src={login} height={0} width={0} style={{ width: '100%', height: '100%' }} />
+                <Image src={treasureBox} height={0} width={0} style={{ width: '100%', height: '100%' }} />
             </div>
             <div className='w-full h-1/2 flex flex-col p-3 pt-0'>
                 <div className='relative -top-12'>

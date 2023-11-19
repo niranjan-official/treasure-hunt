@@ -7,8 +7,8 @@ import { db } from '@/firebase/config'
 import { useAuth } from '@/firebase/auth'
 import { useGlobalContext } from '../context'
 import Loading from '../../components/loading'
-import map from "../images/map.png"
 import Image from 'next/image'
+import map from "../../public/images/map.png"
 
 const Instruction = () => {
 

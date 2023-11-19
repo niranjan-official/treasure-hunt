@@ -21,7 +21,7 @@ input:checked {
   background-color: green;
 }
 .login{
-  background: url("./images/bg.svg");
+  background: url("/images/bg.svg");
   background-size: cover;
   background-repeat: no-repeat;
 }

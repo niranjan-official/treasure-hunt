@@ -45,7 +45,7 @@ export default function Signup() {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 console.log("Error", error);
-                StyleRegistry(errorMessage)
+                alert(errorMessage)
             });
 
     }

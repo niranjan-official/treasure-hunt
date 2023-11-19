@@ -7,8 +7,7 @@ import { useGlobalContext } from '../context';
 import Loading from '../../components/loading';
 import Header from '../../components/header';
 import Image from 'next/image';
-import qmark from "../images/qmark.png"
-
+import qmark from "../../public/images/qmark.png"
 const Question = () => {
 
   const [que, setQue] = useState({ question: "", answer: "", userName: "" })
@@ -66,7 +65,7 @@ const Question = () => {
               <input value={answer} onChange={(e) => setAnswer(e.target.value)} className='input w-3/4 p-1 mt-5' type="text" placeholder='Answer' />
               <button onClick={handleSubmit} className='mt-4 button'>Submit</button>
             </div>
-            <div className='h-1/3 absolute bottom-2'>
+            <div className='h-1/3 absolute bottom-0'>
             <Image src={qmark} width={0} height={0} style={{ height: "100%", width: "100%" }} />
             </div>
           </div>

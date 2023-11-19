@@ -7,8 +7,8 @@ import Qrcode from './qrcode'
 import Loading from '../../components/loading'
 import { useGlobalContext } from '../context'
 import Header from '../../components/header'
-import box from "../images/box.png"
 import Image from 'next/image'
+import box from "../../public/images/box.png"
 
 const Scan = () => {
 
