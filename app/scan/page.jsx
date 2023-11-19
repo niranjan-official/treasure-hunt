@@ -7,6 +7,9 @@ import Qrcode from './qrcode'
 import Loading from '../../components/loading'
 import { useGlobalContext } from '../context'
 import Header from '../../components/header'
+import box from "../images/box.svg"
+// import box1 from "../images/login.svg"
+import Image from 'next/image'
 
 const Scan = () => {
 
@@ -43,13 +46,17 @@ const Scan = () => {
     if (User) {
         if (!load) {
             return (
-                <div className='h-screen flex flex-col'>
+                <div className=' login h-screen flex flex-col overflow-y-hidden'>
                     <Header UserName={hint.userName} />
                     <div className='h-full primary-bg p-3'>
-                        <div className='flex flex-col items-center bg-white rounded-lg p-4 shadow-md'>
-                            <h2 className='text-green-900 text-3xl font-sans border-b-2 border-green-950'>Level: {hint.level}</h2>
-                            <h3 className='bg-green-800 p-3 text-white rounded-xl mt-3'>Hint: {hint.hint}</h3>
-                            <div className='w-full bg-green-500 p-2 rounded-xl mt-5 flex flex-col items-center justify-center'>
+                        <div className='w-full h-2/5 p-2 pt-5 mt-6'>
+                            <Image src={box} width={0} height={0} style={{ height: "100%", width: "100%" }} />
+                        </div>
+                        <div className='h-3/5 p-4 flex flex-col justify-center items-center b-1'>
+                            <div className='w-full bg-white rounded-xl pt-2 pb-8 shadow-md'>
+                                <h3 className='text-xl text-orange-950 p-3 rounded-xl mt-3'>Hint: {hint.hint}</h3>
+                            </div>
+                            <div className='relative -top-6 h-auto w-4/5 bg-orange-200 rounded-xl shadow-md p-3'>
                                 <Qrcode />
                             </div>
                         </div>

@@ -56,9 +56,9 @@ const Question = () => {
   if (User) {
     if (!load) {
       return (
-        <div className='h-screen flex flex-col'>
+        <div className='h-screen flex flex-col login'>
           <Header UserName={que.userName} />
-          <div className='h-full primary-bg p-4'>
+          <div className='h-full primary-bg p-4 justify-center items-center'>
             <div className='lg:w-1/2 w-full bg-white rounded-md p-4 flex flex-col'>
               <h3 className='text-lime-900 text-xl font-serif'>Q. {que.question}</h3>
               <input value={answer} onChange={(e) => setAnswer(e.target.value)} className='input w-3/4 p-1 mt-5' type="text" placeholder='Answer' />

@@ -14,7 +14,7 @@
 }
 
 .primary-bg {
-  @apply w-screen flex flex-col items-center justify-center bg-stone-200
+  @apply w-screen flex flex-col 
 }
 
 input:checked {

@@ -7,6 +7,7 @@ import { auth, db } from '@/firebase/config';
 import { doc, setDoc } from 'firebase/firestore';
 import { useGlobalContext } from '../context';
 import Loading from '../../components/loading';
+import { StyleRegistry } from 'styled-jsx';
 
 export default function Signup() {
 
@@ -36,14 +37,15 @@ export default function Signup() {
                 }).then(() => {
                     router.push("/instruction")
                 }).catch((err) => {
-                    alert("Signup Failed, Try Again")
+                    const errorMessage = err.message;
+                    alert("Signup Failed, Try Again",errorMessage)
                 })
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 console.log("Error", error);
-                // ..
+                StyleRegistry(errorMessage)
             });
 
     }
