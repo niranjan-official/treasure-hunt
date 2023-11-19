@@ -28,7 +28,7 @@ export default function Home() {
 
   }
   return (
-    <div className='h-screen primary-bg login'>
+    <div className='h-screen primary-bg login justify-center items-center'>
       <div className='p-8 flex flex-col items-center rounded-md'>
         <h1 className='mb-2 text-5xl font-serif font-bold text-orange-950'>Login</h1>
         <input value={email} className='input' autoComplete='off' onChange={(e) => setEmail(e.target.value)} type="email" placeholder='Email' />

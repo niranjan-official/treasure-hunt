@@ -7,6 +7,8 @@ import { db } from '@/firebase/config'
 import { useAuth } from '@/firebase/auth'
 import { useGlobalContext } from '../context'
 import Loading from '../../components/loading'
+import map from "../images/map.png"
+import Image from 'next/image'
 
 const Instruction = () => {
 
@@ -21,6 +23,8 @@ const Instruction = () => {
       const newpath = await getData("users", User.email)
       console.log(newpath.path);
       if (newpath.path.length > 0) {
+        console.log(">>>");
+        setLoad(false)
         router.push("/scan")
       } else {
         setLoad(false)
@@ -51,7 +55,7 @@ const Instruction = () => {
   if (User) {
     if (!load) {
       return (
-        <div className=' h-screen primary-bg p-4 pb-0 pt-0 login'>
+        <div className=' min-h-screen primary-bg p-4 pb-0 pt-0 login'>
           <div className='flex flex-col p-4 rounded-lg lg:w-1/2 w-full text-orange-900 text-sm'>
             <div className='w-full flex justify-center items-center gap-1 text-orange-950'>
               <h1 className='text-3xl text-center'>Instructions</h1>
@@ -60,6 +64,9 @@ const Instruction = () => {
               </svg>
 
             </div>
+            <div className='w-dull h-1/3'>
+              <Image src={map} width={0} height={0} style={{height:"100%",width:"100%"}}/>
+            </div>
             <div className='text-xs '>
               <h5 className='mt-4'>• Use the QR code scanner to scan QR codes placed around the campus.
                 Pay attention to the instructions or content provided when scanning QR codes.</h5>
@@ -67,14 +74,6 @@ const Instruction = () => {
 
               <h5 className='mt-4'>• Each team will have a unique set of QR code locations to visit.
                 Stick to your designated pathway and don't deviate.</h5>
-
-
-              <h5 className='mt-4'>• Some QR codes may contain clues or riddles that lead to the next location.
-                Work together with your team to decipher them.</h5>
-
-
-              <h5 className='mt-4'>• Be prepared to encounter hidden challenges or mini-games at certain locations.
-                Complete these tasks to earn bonus points or unlock the next clue.</h5>
 
 
               <h5 className='mt-4'>• Time is of the essence. The team that completes the hunt in the shortest time wins.

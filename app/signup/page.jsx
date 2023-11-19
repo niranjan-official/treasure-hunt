@@ -51,7 +51,7 @@ export default function Signup() {
     }
     if (!load) {
         return (
-            <div className='h-screen primary-bg login'>
+            <div className='h-screen primary-bg login justify-center items-center'>
                 <div className='p-8 flex flex-col items-center rounded-md  '>
                     <h1 className='mb-2 text-5xl font-serif font-bold text-orange-950'>Signup</h1>
                     <input value={name} className='input' onChange={(e) => setName(e.target.value)} type="text" placeholder='Username' />

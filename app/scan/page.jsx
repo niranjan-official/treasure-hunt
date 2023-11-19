@@ -7,8 +7,7 @@ import Qrcode from './qrcode'
 import Loading from '../../components/loading'
 import { useGlobalContext } from '../context'
 import Header from '../../components/header'
-import box from "../images/box.svg"
-// import box1 from "../images/login.svg"
+import box from "../images/box.png"
 import Image from 'next/image'
 
 const Scan = () => {
@@ -46,7 +45,7 @@ const Scan = () => {
     if (User) {
         if (!load) {
             return (
-                <div className=' login h-screen flex flex-col overflow-y-hidden'>
+                <div className=' login min-h-max flex flex-col '>
                     <Header UserName={hint.userName} />
                     <div className='h-full primary-bg p-3'>
                         <div className='w-full h-2/5 p-2 pt-5 mt-6'>
