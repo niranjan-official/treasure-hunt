@@ -62,13 +62,18 @@ const handleData = async (email) => {
 
 // To fetch random question for the particular path
 const handleQuestion = async (User) => {
-  const userData = await getData("users", User.email);
-  const question = await getData("Questions", 'a');
-  console.log(question);
-  const randomIndex = Math.floor(Math.random() * 3) + 1;
-  const obj = { question: question[randomIndex], answer: question[`${randomIndex}a`], userName: userData.name };
-  console.log(obj);
-  return obj;
+  try{
+    const userData = await getData("users", User.email);
+    const question = await getData("Questions", 'a');
+    console.log(question);
+    const randomIndex = Math.floor(Math.random() * 3) + 1;
+    const obj = { question: question[randomIndex], answer: question[`${randomIndex}a`], userName: userData.name };
+    console.log(obj);
+    return obj;
+  }catch(err){
+    alert("Something went Wrong, Try Again!!");
+    console.log(err);
+  }
 }
 // To update firebase data if question is answered correctly
 const handleQuestionSubmit = async (User) => {

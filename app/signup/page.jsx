@@ -53,7 +53,7 @@ export default function Signup() {
         return (
             <div className='h-screen primary-bg login justify-center items-center'>
                 <div className='p-8 flex flex-col items-center rounded-md  '>
-                    <h1 className='mb-2 text-5xl font-serif font-bold text-orange-950'>Signup</h1>
+                    <h1 className='mb-2 text-5xl font-serif font-bold text-orange-950'>Sign up</h1>
                     <input value={name} className='input' onChange={(e) => setName(e.target.value)} type="text" placeholder='Username' />
                     <input value={email} className='input' onChange={(e) => setEmail(e.target.value)} type="email" placeholder='Email' />
                     <input value={password} className='input' onChange={(e) => setPassword(e.target.value)} type="password" placeholder='Password' />
