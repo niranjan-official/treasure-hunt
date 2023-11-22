@@ -23,7 +23,7 @@ const Scan = () => {
             console.log("hihihi");
             setLoad(true)
             const obj = await handleData(User.email);
-            if (obj !== "completed") {
+            if (!obj.StartTime) {
                 console.log(obj);
                 setHint({
                     hint: obj.hint.h,
@@ -33,8 +33,23 @@ const Scan = () => {
                 })
                 setLoad(false)
             } else {
-                alert("Game completed")
-                router.push("/completion")
+                await fetch(
+                    "https://script.google.com/macros/s/AKfycbx-RMfi60O2LqpThb-qZ0DX6gDt4YaxVuLIvEJRutSNbeAN6NO5DUrYZSGIM_6cUHRVcg/exec",
+                    {
+                      method: "POST",
+                      body: obj,
+                    }
+                  )
+                    .then((res) => res.json())
+                    .then((data) => {
+                        console.log(data);
+                        alert("Game completed");
+                        router.push("/completion")
+                    })
+                    .catch((error) => {
+                      console.log(error);
+                      alert("Something went wrong");
+                    });
             }
         }
         if (User) {

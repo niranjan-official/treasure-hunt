@@ -34,7 +34,7 @@ const handleData = async (email) => {
   // If user completed the game, then goto completion page and obtain completion time
   if (userData[newPath[9]] === true) {
     try {
-      const washingtonRef = doc(db, "users", User.currentUser.email);
+      const washingtonRef = doc(db, "users", email);
       const endTime = new Date().getTime()
       const startTime = userData.startTime.seconds
       const totalTime = (endTime / 1000) - startTime;
@@ -43,7 +43,8 @@ const handleData = async (email) => {
         endTime: endTime,
         completionTime: totalTime
       })
-      return "completed"
+      const obj = {Name:userData.name,Email:email,StartTime:startTime,EndTime:(endTime/1000),CompletionTime:totalTime}
+      return obj;
     }
     catch (err) {
       console.log("Database updation failed: ", err);
