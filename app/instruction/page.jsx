@@ -38,7 +38,7 @@ const Instruction = () => {
 
   const handleStart = async () => {
     console.log(User);
-    const path = await shuffle("abcd");
+    const path = await shuffle("abcdefghij");
     console.log(path);
     const array = path.split('');
     setLoad(true)

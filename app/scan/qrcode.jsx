@@ -4,8 +4,8 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react'
 import { useGlobalContext } from '../context';
 
-const Qrcode = () => {
-    const text = "abcdefg";
+const Qrcode = ({qr}) => {
+   
     const Router = useRouter();
     const { setScan } = useGlobalContext()
     useEffect(() => {
@@ -19,7 +19,7 @@ const Qrcode = () => {
         scanner.render(success, error);
 
         function success(result) {
-            if (result === text) {
+            if (result === qr) {
                 scanner.clear();
                 setScan(true);
                 Router.push("/question")

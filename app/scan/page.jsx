@@ -20,12 +20,14 @@ const Scan = () => {
 
     useEffect(() => {
         const fetchData = async () => {
+            console.log("hihihi");
             setLoad(true)
             const obj = await handleData(User.email);
             if (obj !== "completed") {
                 console.log(obj);
                 setHint({
-                    hint: obj.hint,
+                    hint: obj.hint.h,
+                    qr:obj.hint.qr,
                     level: obj.level,
                     userName: obj.userName
                 })
@@ -56,10 +58,11 @@ const Scan = () => {
                                 <h3 className='text-xl text-orange-950 p-3 rounded-xl mt-3'>Hint: {hint.hint}</h3>
                             </div>
                             <div className='relative -top-6 h-auto w-4/5 bg-orange-200 rounded-xl shadow-inner shadow-orange-950 p-3'>
-                                <Qrcode />
+                                <Qrcode qr={hint.qr}/>
                             </div>
                         </div>
                     </div>
+                    <h1 className='text-2xl bg-orange-100 p-1 rounded-lg shadow-inner shadow-orange-950 text-orange-950 absolute left-3 top-16 font-serif'>Level: {hint.level}</h1>
                 </div>
             )
         } else {
