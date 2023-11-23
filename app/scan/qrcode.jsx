@@ -28,7 +28,7 @@ const Qrcode = ({qr}) => {
             }
         }
         function error(err) {
-            alert("Scanning Failed, Try Again")
+            console.log(err);
         }
     }, [])
     return (
