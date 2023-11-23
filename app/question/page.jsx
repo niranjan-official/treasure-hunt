@@ -31,9 +31,8 @@ const Question = () => {
       setQue({ question: question.question, answer: question.answer, userName: question.userName })
       setLoad(false)
     }
-    // console.log(User);
+   
     if (User) {
-      console.log(User);
       fetchQuestion()
     }
   }, [User])
@@ -67,7 +66,7 @@ const Question = () => {
             </div>
           </div>
             <div className='h-1/3 absolute bottom-0'>
-            <Image src={qmark} width={0} height={0} style={{ height: "100%", width: "100%" }} />
+            <Image src={qmark} width={0} height={0} alt='qmark' style={{ height: "100%", width: "100%" }} />
             </div>
         </div>
       )

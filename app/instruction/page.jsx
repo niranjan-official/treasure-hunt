@@ -21,9 +21,8 @@ const Instruction = () => {
     setLoad(true)
     const checkUserPath = async () => {
       const newpath = await getData("users", User.email)
-      console.log(newpath.path);
+    
       if (newpath.path.length > 0) {
-        console.log(">>>");
         router.push("/scan")
       } else {
         setLoad(false)
@@ -32,13 +31,10 @@ const Instruction = () => {
     if (User) {
       checkUserPath()
     }
-    console.log(User);
   }, [User])
 
   const handleStart = async () => {
-    console.log(User);
     const path = await shuffle("abcdefghij");
-    console.log(path);
     const array = path.split('');
     setLoad(true)
     const washingtonRef = doc(db, "users", User.email);
@@ -48,7 +44,6 @@ const Instruction = () => {
     }).then(() => {
       router.push("/scan")
     }).catch((err) => {
-      console.log(err);
     })
   }
   if (User) {
@@ -64,7 +59,7 @@ const Instruction = () => {
 
             </div>
             <div className='w-dull h-1/3'>
-              <Image src={map} width={0} height={0} style={{height:"100%",width:"100%"}}/>
+              <Image src={map} width={0} height={0} alt='map' style={{height:"100%",width:"100%"}}/>
             </div>
             <div className='text-xs '>
               <h5 className='mt-4'>• Use the QR code scanner to scan QR codes placed around the campus.

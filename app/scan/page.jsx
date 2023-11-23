@@ -20,11 +20,9 @@ const Scan = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            console.log("hihihi");
             setLoad(true)
             const obj = await handleData(User.email);
             if (!obj.StartTime) {
-                console.log(obj);
                 setHint({
                     hint: obj.hint.h,
                     qr: obj.hint.qr,
@@ -38,7 +36,6 @@ const Scan = () => {
             }
         }
         if (User) {
-            console.log(User);
             fetchData();
         }
     }, [User])
@@ -51,11 +48,11 @@ const Scan = () => {
                     <Header UserName={hint.userName} />
                     <div className='h-full primary-bg p-3'>
                         <div className='w-full h-2/5 p-2 pt-5 mt-6'>
-                            <Image src={box} width={0} height={0} style={{ height: "100%", width: "100%" }} />
+                            <Image src={box} width={0} height={0} alt='box' style={{ height: "100%", width: "100%" }} />
                         </div>
                         <div className='h-3/5 p-4 flex flex-col justify-center items-center b-1'>
                             <div className='w-full bg-orange-100 rounded-xl pt-2 pb-8 shadow-inner shadow-orange-950'>
-                                <h3 className='text-xl text-orange-950 p-3 rounded-xl mt-3'>Hint: {hint.hint}</h3>
+                                <h3 className='text-lg text-orange-950 p-3 rounded-xl mt-3'>Hint: {hint.hint}</h3>
                             </div>
                             <div className='relative -top-6 h-auto w-4/5 bg-orange-200 rounded-xl shadow-inner shadow-orange-950 p-3'>
                                 <Qrcode qr={hint.qr} />

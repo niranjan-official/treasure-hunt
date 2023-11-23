@@ -4,6 +4,8 @@ import { signInWithEmailAndPassword } from 'firebase/auth'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import frame from '../../public/images/frame.svg'
+import Image from 'next/image'
 
 export default function Home() {
 
@@ -15,13 +17,11 @@ export default function Home() {
   const handleSubmit = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then(async (userCredential) => {
-        console.log(userCredential);
         router.push("/instruction")
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorCode);
         alert("Login Failed, Try Again !!");
       });
 
@@ -40,6 +40,9 @@ export default function Home() {
           <Link href="/signup" className='cursor-pointer ml-8'>Create new Account?</Link>
         </div>
         <button onClick={handleSubmit} className='button'>LOGIN</button>
+      </div>
+      <div className='w-full h-2/5 p-2 absolute -bottom-14'>
+        <Image src={frame} width={0} height={0} alt='trophy' style={{ height: "100%", width: "100%"}} />
       </div>
     </div>
   )

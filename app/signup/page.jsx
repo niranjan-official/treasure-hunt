@@ -7,7 +7,8 @@ import { auth, db } from '@/firebase/config';
 import { doc, setDoc } from 'firebase/firestore';
 import { useGlobalContext } from '../context';
 import Loading from '../../components/loading';
-import { StyleRegistry } from 'styled-jsx';
+import frame from '../../public/images/frame.svg'
+import Image from 'next/image';
 
 export default function Signup() {
 
@@ -44,13 +45,12 @@ export default function Signup() {
                     router.push("/instruction")
                 }).catch((err) => {
                     const errorMessage = err.message;
-                    alert("Signup Failed, Try Again",errorMessage)
+                    alert("Signup Failed, Try Again", errorMessage)
                 })
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                console.log("Error", error);
                 alert(errorMessage)
             });
 
@@ -71,6 +71,9 @@ export default function Signup() {
                         <Link href="/login" className='cursor-pointer ml-8 text-orange-950'>Already have an account?</Link>
                     </div>
                     <button onClick={handleSubmit} className='button'>SIGNUP</button>
+                </div>
+                <div className='w-full h-2/5 p-2 absolute -bottom-14'>
+                    <Image src={frame} width={0} height={0} alt='trophy' style={{ height: "100%", width: "100%" }} />
                 </div>
             </div>
         )
