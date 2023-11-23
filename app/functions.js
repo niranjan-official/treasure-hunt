@@ -71,8 +71,6 @@ const handleQuestion = async (User) => {
         const randomIndex = Math.floor(Math.random() * 3) + 1;
         const obj = { question: question[randomIndex], answer: question[`${randomIndex}a`], userName: userData.name };
         return obj;
-      }else{
-        alert("Something went Wrong!! Try Again");
       }
     }
     }catch (err) {
