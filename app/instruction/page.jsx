@@ -24,7 +24,6 @@ const Instruction = () => {
       console.log(newpath.path);
       if (newpath.path.length > 0) {
         console.log(">>>");
-        setLoad(false)
         router.push("/scan")
       } else {
         setLoad(false)

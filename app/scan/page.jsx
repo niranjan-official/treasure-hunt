@@ -27,29 +27,14 @@ const Scan = () => {
                 console.log(obj);
                 setHint({
                     hint: obj.hint.h,
-                    qr:obj.hint.qr,
+                    qr: obj.hint.qr,
                     level: obj.level,
                     userName: obj.userName
                 })
                 setLoad(false)
             } else {
-                await fetch(
-                    "https://script.google.com/macros/s/AKfycbx-RMfi60O2LqpThb-qZ0DX6gDt4YaxVuLIvEJRutSNbeAN6NO5DUrYZSGIM_6cUHRVcg/exec",
-                    {
-                      method: "POST",
-                      body: obj,
-                    }
-                  )
-                    .then((res) => res.json())
-                    .then((data) => {
-                        console.log(data);
-                        alert("Game completed");
-                        router.push("/completion")
-                    })
-                    .catch((error) => {
-                      console.log(error);
-                      alert("Something went wrong");
-                    });
+                alert("Game completed !!!");
+                router.push("/completion");
             }
         }
         if (User) {
@@ -73,7 +58,7 @@ const Scan = () => {
                                 <h3 className='text-xl text-orange-950 p-3 rounded-xl mt-3'>Hint: {hint.hint}</h3>
                             </div>
                             <div className='relative -top-6 h-auto w-4/5 bg-orange-200 rounded-xl shadow-inner shadow-orange-950 p-3'>
-                                <Qrcode qr={hint.qr}/>
+                                <Qrcode qr={hint.qr} />
                             </div>
                         </div>
                     </div>
