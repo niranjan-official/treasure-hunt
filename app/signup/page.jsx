@@ -72,9 +72,9 @@ export default function Signup() {
                     </div>
                     <button onClick={handleSubmit} className='button'>SIGNUP</button>
                 </div>
-                <div className='w-full h-2/5 p-2 absolute -bottom-14'>
+                {/* <div className='w-full h-2/5 p-2 absolute -bottom-14'>
                     <Image src={frame} width={0} height={0} alt='trophy' style={{ height: "100%", width: "100%" }} />
-                </div>
+                </div> */}
             </div>
         )
     } else {
