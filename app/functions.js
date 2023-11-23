@@ -82,7 +82,7 @@ const handleQuestion = async (User) => {
 const handleQuestionSubmit = async (User) => {
   const userData = await getData("users", User.email);
   const newPath = userData.path
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < 10; i++) {
     let c = newPath[i];
     if (userData[c] === false) {
       try {
