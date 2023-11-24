@@ -74,16 +74,13 @@ const Instruction = () => {
                 Keep an eye on the clock and strategize your moves.</h5>
 
 
-              <h5 className='mt-4'>• Navigate the interactive map on the website to help you find QR code positions.
-                Access your user dashboard to monitor your progress and view the leaderboard.</h5>
+              <h5 className='mt-4'>• Pay attention to each clue's details. They will guide your team to the next location.</h5>
 
 
-              <h5 className='mt-4'>• Communicate with your team members and competitors through the in-game messaging system.
-                Use it for coordination and strategy.</h5>
+              <h5 className='mt-4'>• Keep the answers within your team. Let other teams enjoy the challenge without spoilers.</h5>
 
 
-              <h5 className='mt-4'>• Personalize your avatar through your user profile on the website.
-                Make your team stand out.</h5>
+              <h5 className='mt-4'>• Dont displace or manipulate the qr codes. They are strategically placed for a fair and challenging game.</h5>
 
 
             </div>
