@@ -43,6 +43,7 @@ const Question = () => {
     let Answer = LowerCaseAnswer.replace(/\s/g, "");
     if (Answer === que.answer) {
       alert("Correct answer");
+      setLoad(true);
       const state = await handleQuestionSubmit(User)
       if (state) {
         router.push("/scan")
