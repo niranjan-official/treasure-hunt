@@ -3,7 +3,20 @@ import Image from 'next/image'
 import React from 'react'
 import Link from 'next/link'
 import treasureBox from "../public/images/login.svg"
+import { doc, getDoc } from 'firebase/firestore'
+import { db } from '@/firebase/config'
 const Home = () => {
+
+    const getFirestoreData = async () => {
+        const docRef = doc(db, "questions", "a");
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          console.log("Document data:", docSnap.data());
+        } else {
+          // docSnap.data() will be undefined in this case
+          console.log("No such document!");
+        }
+      };
     return (
         <div className='w-screen h-screen bg-color'>
             <div className='w-full h-1/2'>
@@ -23,6 +36,7 @@ const Home = () => {
                     <Link href="/signup">
                         <button className='w-full p-3 rounded-2xl shadow-md bg-black text-white'>SIGN UP</button>
                     </Link>
+                    <button onClick={getFirestoreData}>Get document</button>
                 </div>
             </div>
 
