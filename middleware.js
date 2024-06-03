@@ -5,7 +5,7 @@ import {
   
   const isProtectedRoute = createRouteMatcher([
     '/',
-    '/dashboard(.*)',
+    '/create(.*)',
     '/forum(.*)',
   ]);
   

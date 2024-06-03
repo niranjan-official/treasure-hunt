@@ -12,12 +12,14 @@ const useGameCreationStore = create((set) => ({
     qrData: [],
   },
   pageStep: 1,
-  incrementPageStep: () =>set(state =>({
-    pageStep: state.pageStep + 1
-  })),
-  decrementPageStep: () =>set(state =>({
-    pageStep: state.pageStep - 1
-  })),
+  incrementPageStep: () =>
+    set((state) => ({
+      pageStep: state.pageStep + 1,
+    })),
+  decrementPageStep: () =>
+    set((state) => ({
+      pageStep: state.pageStep - 1,
+    })),
   updateBasicData: (basicData) =>
     set((state) => ({
       gameData: { ...state.gameData, basicData },
@@ -30,9 +32,9 @@ const useGameCreationStore = create((set) => ({
     set((state) => ({
       gameData: { ...state.gameData, questionsAnswers },
     })),
-  updateQrData: (QrData) =>
+  updateQrData: (qrData) =>
     set((state) => ({
-      gameData: { ...state.gameData, QrData },
+      gameData: { ...state.gameData, qrData },
     })),
 }));
 

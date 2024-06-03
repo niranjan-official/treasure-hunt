@@ -3,11 +3,10 @@ import { auth, currentUser } from "@clerk/nextjs/server";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { NextResponse } from "next/server";
 
-export const dynamic = "force-dynamic"; // defaults to auto
+export const dynamic = "force-dynamic";
 
 export async function GET() {
   try {
-
     const { userId } = auth();
     if(!userId){
       return new NextResponse('Unauthorized',{status: 401})
