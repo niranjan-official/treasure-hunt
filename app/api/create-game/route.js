@@ -2,8 +2,6 @@ import { db } from "@/firebase/config";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { NextResponse } from "next/server";
 
-export const dynamic = "force-dynamic";
-
 const generateRandomToken = () => {
   return Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000;
 };
@@ -15,6 +13,7 @@ const checkTokenExistence = async (randomToken) => {
 };
 
 export async function POST(req, res) {
+
   const data = await req.json();
   console.log(data);
 

@@ -4,13 +4,13 @@ import React, { useEffect, useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import { MdGames } from "react-icons/md";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import AlertBox from "../shared/AlertBox";
+import AlertBox from "./AlertBox";
 
 const Stepper = ({ prev, next, submit, triggerFunction }) => {
-  const { gameData, incrementPageStep, decrementPageStep } =
+  const { gameData, incrementPageStep, decrementPageStep, refreshGameData } =
     useGameCreationStore();
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [gameToken, setGameToken] = useState('');
+  const [gameToken, setGameToken] = useState("");
 
   useEffect(() => {
     if (isSubmitted) {
@@ -32,6 +32,18 @@ const Stepper = ({ prev, next, submit, triggerFunction }) => {
   };
 
   const createGame = async () => {
+    const { qrData, questionsAnswers, basicData } = gameData;
+
+    if (
+      qrData.length < basicData.levels ||
+      questionsAnswers.length < basicData.levels
+    ) {
+      alert(
+        "The number of QR data and question/answers should be at least the number of levels."
+      );
+      return;
+    }
+    
     try {
       const res = await fetch("http://localhost:3000/api/create-game", {
         method: "POST",
@@ -42,7 +54,8 @@ const Stepper = ({ prev, next, submit, triggerFunction }) => {
       });
       if (res.ok) {
         const response = await res.json();
-        setGameToken(response.randomToken)
+        setGameToken(response.randomToken);
+        refreshGameData();
       }
     } catch (error) {
       console.log(error);
@@ -85,7 +98,11 @@ const Stepper = ({ prev, next, submit, triggerFunction }) => {
           </button>
         )}
       </div>
-      <AlertBox open={gameToken ? true : false} heading={"Game created successfully !"} gameToken={gameToken} />
+      <AlertBox
+        open={gameToken ? true : false}
+        heading={"Game created successfully !"}
+        gameToken={gameToken}
+      />
     </div>
   );
 };

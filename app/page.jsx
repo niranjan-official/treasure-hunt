@@ -2,8 +2,10 @@ import Image from "next/image";
 import React from "react";
 import treasureBox from "../public/images/login.svg";
 import NavButtons from "@/components/home/NavButtons";
+import { auth } from "@clerk/nextjs/server";
 
 const Home = () => {
+
   return (
     <section className="w-screen h-screen flex justify-center overflow-hidden">
       <div className="max-w-4xl h-full flex flex-col bg-primary">
