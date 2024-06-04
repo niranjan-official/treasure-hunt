@@ -35,5 +35,5 @@ export async function POST(req, res) {
     qrData: data.qrData,
   });
 
-  return NextResponse.json(data);
+  return NextResponse.json({randomToken});
 }

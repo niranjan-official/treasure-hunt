@@ -4,11 +4,13 @@ import React, { useEffect, useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import { MdGames } from "react-icons/md";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import AlertBox from "../shared/AlertBox";
 
 const Stepper = ({ prev, next, submit, triggerFunction }) => {
   const { gameData, incrementPageStep, decrementPageStep } =
     useGameCreationStore();
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [gameToken, setGameToken] = useState('');
 
   useEffect(() => {
     if (isSubmitted) {
@@ -39,7 +41,8 @@ const Stepper = ({ prev, next, submit, triggerFunction }) => {
         },
       });
       if (res.ok) {
-        console.log("Success");
+        const response = await res.json();
+        setGameToken(response.randomToken)
       }
     } catch (error) {
       console.log(error);
@@ -82,6 +85,7 @@ const Stepper = ({ prev, next, submit, triggerFunction }) => {
           </button>
         )}
       </div>
+      <AlertBox open={gameToken ? true : false} heading={"Game created successfully !"} gameToken={gameToken} />
     </div>
   );
 };
