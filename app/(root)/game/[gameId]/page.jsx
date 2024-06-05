@@ -21,10 +21,10 @@ const getGameData = async (gameId, userId) => {
     }
   } catch (error) {
     console.error("Error fetching game data: ", error);
+    return {error}
   }
   return null;
 };
-
 const initializeNewPlayer = async (gameData) => {
   "use server";
   try {
@@ -65,12 +65,13 @@ const page = async ({ params }) => {
   const user = await currentUser();
   const userGameStatus = await getGameData(params.gameId, user.id);
 
-  if (!userGameStatus) {
+  if (userGameStatus.error || !userGameStatus) {
     return (
       <div className="min-h-screen flex flex-col bg-slate-200">
         <div className="w-full flex flex-col p-4">
-          <div className="flex bg-red-700 text-white p-3 rounded-[0.5rem]">
+          <div className="flex flex-col bg-red-700 text-white p-3 rounded-[0.5rem]">
             <p>Error fetching game status. Please try again.</p>
+            <p>{userGameStatus?.error}</p>
           </div>
         </div>
       </div>
@@ -102,8 +103,9 @@ const page = async ({ params }) => {
   return (
     <div className="w-full min-h-screen flex flex-col items-center justify-around bg-slate-200">
       <div className="w-full flex flex-col p-4">
-        <div className="flex bg-sky-700 text-white p-3 rounded-[0.5rem]">
+        <div className="flex flex-col bg-sky-700 text-white p-3 rounded-[0.5rem]">
           <p>{currentLevelData ? currentLevelData.hint : "Game Finished"}</p>
+          <p>{process.env.NEXT_PUBLIC_SERVER_URL}</p>
         </div>
       </div>
         <QRscanBlock/>
