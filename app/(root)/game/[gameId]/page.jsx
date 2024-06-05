@@ -6,7 +6,7 @@ import QRscanBlock from "./QRscanBlock";
 const getGameData = async (gameId, userId) => {
   try {
     const res = await fetch(
-      `http://localhost:3000/api/get-game-data?gameId=${gameId}&userId=${userId}`,
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/get-game-data?gameId=${gameId}&userId=${userId}`,
       {
         method: "GET",
         cache: "no-store",
@@ -28,7 +28,7 @@ const getGameData = async (gameId, userId) => {
 const initializeNewPlayer = async (gameData) => {
   "use server";
   try {
-    const res = await fetch("http://localhost:3000/api/initialize-game", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/initialize-game`, {
       method: "POST",
       body: JSON.stringify(gameData),
       headers: {

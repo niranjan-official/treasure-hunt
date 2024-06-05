@@ -46,7 +46,7 @@ const Stepper = ({ prev, next, submit, triggerFunction }) => {
     }
     
     try {
-      const res = await fetch("http://localhost:3000/api/create-game", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/create-game`, {
         method: "POST",
         body: JSON.stringify(gameData),
         headers: {
