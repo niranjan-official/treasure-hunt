@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import QrScanner from "qr-scanner";
 
-const Scanner = () => {
+const Scanner = ({qrData, setIsScannerOn}) => {
   const scanner = useRef();
   const videoEl = useRef(null);
   const qrBoxEl = useRef(null);
@@ -11,7 +11,11 @@ const Scanner = () => {
 
   const onScanSuccess = (result) => {
     console.log(result);
-    setScannedResult(result?.data);
+    console.log(qrData);
+    if(result.data === qrData){
+        console.log("QR DATA MATCHED");
+        setIsScannerOn(false);
+    }
   };
 
   const onScanFail = (err) => {
@@ -43,7 +47,6 @@ const Scanner = () => {
     };
   }, []);
 
-  // ❌ If "camera" is not allowed in browser permissions, show an alert.
   useEffect(() => {
     if (!qrOn) {
       alert(
@@ -64,20 +67,7 @@ const Scanner = () => {
           className="qr-frame"
         /> */}
       </div>
-
-      {scannedResult && (
-        <p
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            zIndex: 99999,
-            color: "white",
-          }}
-        >
-          Scanned Result: {scannedResult}
-        </p>
-      )}
+      <button onClick={()=>setIsScannerOn(false)} className="bg-red-500 text-white font-semibold px-3 py-1 absolute bottom-0 left-[40%]" >Stop</button>
     </div>
   );
 };

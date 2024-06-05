@@ -1,7 +1,7 @@
 import InstructionBox from "@/components/gamePage/InstructionBox";
+import QRscanBlock from "@/components/gamePage/QRscanBlock";
 import { currentUser } from "@clerk/nextjs/server";
 import React from "react";
-import QRscanBlock from "./QRscanBlock";
 
 const getGameData = async (gameId, userId) => {
   try {
@@ -47,13 +47,15 @@ const initializeNewPlayer = async (gameData) => {
 };
 
 const findFirstUnfinishedLevel = (gameLevelStatus) => {
-  for (const level of gameLevelStatus) {
+  for (let i = 0; i < gameLevelStatus.length; i++) {
+    const level = gameLevelStatus[i];
     if (level.progress === "pending") {
       return {
         hint: level.hint,
         qr: level.qr,
         question: level.question,
         answer: level.answer,
+        level: i + 1,
       };
     }
   }
@@ -86,6 +88,18 @@ const page = async ({ params }) => {
     gameId: params.gameId,
   };
 
+  if(status === "new player"){
+    return (
+      <div className="w-full min-h-screen bg-slate-200">
+        <InstructionBox
+            open={status === "new player"}
+            startFunction={initializeNewPlayer}
+            gameData={instructionParameter}
+          />
+      </div>
+    )
+  }
+
   let currentLevelData;
   if (status === "existing player") {
     const unfinishedLevel = findFirstUnfinishedLevel(
@@ -102,18 +116,13 @@ const page = async ({ params }) => {
     <div className="w-full min-h-screen flex flex-col items-center justify-around bg-slate-200">
       <div className="w-full flex flex-col p-4">
         <div className="flex flex-col bg-sky-700 text-white p-3 rounded-[0.5rem]">
+          <span className="text-3xl font-bold" >Level {currentLevelData?.level}</span>
+          <hr className="my-4"  />
           <p>{currentLevelData ? currentLevelData.hint : "Game Finished"}</p>
         </div>
       </div>
-        <QRscanBlock/>
+        <QRscanBlock qrData={currentLevelData.qr} />
       <div>
-        {status === "new player" && (
-          <InstructionBox
-            open={status === "new player"}
-            startFunction={initializeNewPlayer}
-            gameData={instructionParameter}
-          />
-        )}
       </div>
     </div>
   );
