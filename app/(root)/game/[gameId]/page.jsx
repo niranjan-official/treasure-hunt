@@ -21,7 +21,6 @@ const getGameData = async (gameId, userId) => {
     }
   } catch (error) {
     console.error("Error fetching game data: ", error);
-    return {error}
   }
   return null;
 };
@@ -65,13 +64,12 @@ const page = async ({ params }) => {
   const user = await currentUser();
   const userGameStatus = await getGameData(params.gameId, user.id);
 
-  if (userGameStatus.error || !userGameStatus) {
+  if (!userGameStatus) {
     return (
       <div className="min-h-screen flex flex-col bg-slate-200">
         <div className="w-full flex flex-col p-4">
           <div className="flex flex-col bg-red-700 text-white p-3 rounded-[0.5rem]">
             <p>Error fetching game status. Please try again.</p>
-            <p>{userGameStatus?.error}</p>
           </div>
         </div>
       </div>
@@ -105,7 +103,6 @@ const page = async ({ params }) => {
       <div className="w-full flex flex-col p-4">
         <div className="flex flex-col bg-sky-700 text-white p-3 rounded-[0.5rem]">
           <p>{currentLevelData ? currentLevelData.hint : "Game Finished"}</p>
-          <p>{process.env.NEXT_PUBLIC_SERVER_URL}</p>
         </div>
       </div>
         <QRscanBlock/>
