@@ -8,17 +8,19 @@ export const dynamic = "force-dynamic";
 export async function GET() {
   try {
     const { userId } = auth();
-    if(!userId){
-      return new NextResponse('Unauthorized',{status: 401})
+    if (!userId) {
+      return new NextResponse('Unauthorized', { status: 401 });
     }
 
     const userData = await currentUser();
-    if(!userData){
-      return new NextResponse('User Not Exist',{status: 404})
+    if (!userData) {
+      return new NextResponse('User Not Exist', { status: 404 });
     }
 
     const docRef = doc(db, "users", userId);
     const docSnap = await getDoc(docRef);
+
+    // If the user document does not exist, create it
     if (!docSnap.exists()) {
       await setDoc(doc(db, "users", userId), {
         username: userData.username,
@@ -26,16 +28,20 @@ export async function GET() {
       });
     }
 
+    // Redirect to the homepage
     return new NextResponse(null, {
-      status: 302, // 302 Found - temporary redirect
+      status: 302,
       headers: {
         Location: "http://localhost:3000/",
       },
     });
+
   } catch (error) {
-    console.log(error);
+    console.error('Error in GET /api/auth/create-user:', error);
+
+    // Redirect to the create-user page in case of an error
     return new NextResponse(null, {
-      status: 302, // 302 Found - temporary redirect
+      status: 302,
       headers: {
         Location: "http://localhost:3000/api/auth/create-user",
       },

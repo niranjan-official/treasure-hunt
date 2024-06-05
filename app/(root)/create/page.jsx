@@ -5,7 +5,6 @@ import BasicData from "./BasicData";
 import QueAndAns from "./QueAndAns";
 import QrData from "./QrData";
 import useGameCreationStore from "@/hooks/useGameCreationStore";
-import AlertBox from "@/components/shared/AlertBox";
 
 const page = () => {
   const { pageStep } = useGameCreationStore();

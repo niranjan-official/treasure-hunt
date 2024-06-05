@@ -41,6 +41,7 @@ const Stepper = ({ prev, next, submit, triggerFunction }) => {
       alert(
         "The number of QR data and question/answers should be at least the number of levels."
       );
+      setIsSubmitted(false);
       return;
     }
     
