@@ -2,16 +2,45 @@
 import React, { useState } from "react";
 import Scanner from "./Scanner";
 import { BsQrCodeScan } from "react-icons/bs";
+import QuestionBlock from "./QuestionBlock";
+import { useRouter } from "next/navigation";
 
-const QRscanBlock = ({qrData}) => {
+const QRscanBlock = ({currentLevelData}) => {
 
   const [isScannerOn, setIsScannerOn] = useState(false);
+  const [scanSuccess, setScanSuccess] = useState(false);
+  const Router = useRouter();
+
+  const updateLevelCompletion = async() => {
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/api/update-game-level`,
+        {
+          method: "POST",
+          body: JSON.stringify(currentLevelData.level),
+          headers: {
+            "content-type": "application/json",
+          },
+        }
+      );
+      if (res.ok) {
+        console.log("Updation successfull !");
+        setIsScannerOn(false);
+        setScanSuccess(false);
+        Router.refresh();
+      } else {
+        console.log("Updation Failed");
+      }
+    } catch (error) {
+        console.log("Updation Failed", error);
+    }
+  };
 
   return (
     <div className="w-3/4 aspect-square border-2 border-sky-900 border-dashed">
       {isScannerOn ? (
         <>
-        <Scanner qrData={qrData} setIsScannerOn={setIsScannerOn}/>
+        <Scanner qrData={currentLevelData.qr} setScanSuccess={setScanSuccess} setIsScannerOn={setIsScannerOn}/>
         </>
       ) : (
         <div className="w-full h-full flex justify-center items-center rounded-[0.5rem]">
@@ -24,6 +53,11 @@ const QRscanBlock = ({qrData}) => {
           </button>
         </div>
       )}
+      {
+        scanSuccess && (
+          <QuestionBlock open={scanSuccess} question={currentLevelData.question} answer={currentLevelData.answer} updateLevelCompletion={updateLevelCompletion} />
+        )
+      }
     </div>
   );
 };

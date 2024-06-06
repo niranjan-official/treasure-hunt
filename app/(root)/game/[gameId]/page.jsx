@@ -1,6 +1,7 @@
 import InstructionBox from "@/components/gamePage/InstructionBox";
 import QRscanBlock from "@/components/gamePage/QRscanBlock";
 import { currentUser } from "@clerk/nextjs/server";
+import { Span } from "next/dist/trace";
 import React from "react";
 
 const getGameData = async (gameId, userId) => {
@@ -27,13 +28,16 @@ const getGameData = async (gameId, userId) => {
 const initializeNewPlayer = async (gameData) => {
   "use server";
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/initialize-game`, {
-      method: "POST",
-      body: JSON.stringify(gameData),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/initialize-game`,
+      {
+        method: "POST",
+        body: JSON.stringify(gameData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     if (res.ok) {
       const result = await res.json();
@@ -88,16 +92,16 @@ const page = async ({ params }) => {
     gameId: params.gameId,
   };
 
-  if(status === "new player"){
+  if (status === "new player") {
     return (
       <div className="w-full min-h-screen bg-slate-200">
         <InstructionBox
-            open={status === "new player"}
-            startFunction={initializeNewPlayer}
-            gameData={instructionParameter}
-          />
+          open={status === "new player"}
+          startFunction={initializeNewPlayer}
+          gameData={instructionParameter}
+        />
       </div>
-    )
+    );
   }
 
   let currentLevelData;
@@ -116,14 +120,17 @@ const page = async ({ params }) => {
     <div className="w-full min-h-screen flex flex-col items-center justify-around bg-slate-200">
       <div className="w-full flex flex-col p-4">
         <div className="flex flex-col bg-sky-700 text-white p-3 rounded-[0.5rem]">
-          <span className="text-3xl font-bold" >Level {currentLevelData?.level}</span>
-          <hr className="my-4"  />
+          {currentLevelData && (
+            <span className="text-3xl font-bold">
+              Level: {currentLevelData.level}
+            </span>
+          )}
+          <hr className="my-4" />
           <p>{currentLevelData ? currentLevelData.hint : "Game Finished"}</p>
         </div>
       </div>
-        <QRscanBlock qrData={currentLevelData.qr} />
-      <div>
-      </div>
+      <QRscanBlock currentLevelData={currentLevelData} />
+      <div></div>
     </div>
   );
 };

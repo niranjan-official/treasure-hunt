@@ -44,15 +44,17 @@ const Stepper = ({ prev, next, submit, triggerFunction }) => {
       setIsSubmitted(false);
       return;
     }
-    
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/create-game`, {
-        method: "POST",
-        body: JSON.stringify(gameData),
-        headers: {
-          "content-type": "application/json",
-        },
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/api/create-game`,
+        {
+          method: "POST",
+          body: JSON.stringify(gameData),
+          headers: {
+            "content-type": "application/json",
+          },
+        }
+      );
       if (res.ok) {
         const response = await res.json();
         setGameToken(response.randomToken);

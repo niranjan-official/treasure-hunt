@@ -15,6 +15,9 @@ import {
 import { FaMap } from "react-icons/fa";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import Link from "next/link";
+import { IoLocation } from "react-icons/io5";
+import { IoFootsteps } from "react-icons/io5";
+import { IoGameController } from "react-icons/io5";
 
 const PlayGame = ({ SearchGameId }) => {
   const [gameId, setGameId] = useState("");
@@ -28,21 +31,21 @@ const PlayGame = ({ SearchGameId }) => {
     if (game.exist) {
       setGameDetails(game.data);
       console.log(game.data);
-    }else{
-        setGameNotExist(true);
+    } else {
+      setGameNotExist(true);
     }
     setSearching(false);
   };
-  useEffect(()=>{
-    if(gameNotExist){
-        setTimeout(() => {
-            setGameNotExist(false);
-        }, 2000);
+  useEffect(() => {
+    if (gameNotExist) {
+      setTimeout(() => {
+        setGameNotExist(false);
+      }, 2000);
     }
-  },[gameNotExist])
+  }, [gameNotExist]);
 
   return (
-    <Dialog>
+    <Dialog onOpenChange={()=>{setGameDetails(''), setGameId('')}} >
       <DialogTrigger asChild>
         <button className="w-full flex items-center gap-2 justify-center p-3 bg-orange-400 rounded-3xl shadow-md">
           <FaMap size={20} className="text-black" /> Play Game
@@ -51,11 +54,21 @@ const PlayGame = ({ SearchGameId }) => {
       <DialogContent className="border-0 bg-slate-200">
         <DialogHeader>
           {gameDetails ? (
-            <div className="flex flex-col gap-4 items-center">
-                <DialogTitle>{gameDetails?.gameTitle}</DialogTitle>
-                <span>Venue: {gameDetails?.venue}</span>
-                <span>No: of levels: {gameDetails?.levels}</span>
-                <Link href={`/game/${gameDetails?.gameId}`} className="p-2 px-4 rounded-3xl bg-sky-900 text-white"  >Join Game</Link>
+            <div className="w-full flex flex-col gap-4">
+              <DialogTitle className="text-center text-2xl">
+                {gameDetails?.gameTitle}
+              </DialogTitle>
+              <div className="flex flex-col text-left gap-1 font-semibold" >
+                <span className="flex gap-1 items-center"><IoLocation size={20} />Venue: {gameDetails?.venue}</span>
+                <span className="flex gap-1 items-center"><IoFootsteps size={20} />No: of levels: {gameDetails?.levels}</span>
+                <span className="flex gap-1 items-center"><IoGameController size={20} />Game code:  {gameDetails?.gameId}</span>
+              </div>
+              <Link
+                href={`/game/${gameDetails?.gameId}`}
+                className="w-full flex justify-center p-2 bg-green-500 hover:bg-green-700 text-white"
+              >
+                Join Game
+              </Link>
             </div>
           ) : (
             <div className="flex flex-col gap-4 items-center">
@@ -74,13 +87,15 @@ const PlayGame = ({ SearchGameId }) => {
                   <InputOTPSlot index={5} />
                 </InputOTPGroup>
               </InputOTP>
-              {
-                gameNotExist && <span className="text-sm text-red-500" >A game with this code does not exist</span>
-              }
+              {gameNotExist && (
+                <span className="text-sm text-red-500">
+                  A game with this code does not exist
+                </span>
+              )}
               <button
                 disabled={searching}
                 onClick={handleSearch}
-                className="p-2 px-4 bg-sky-900 text-white rounded-3xl"
+                className="w-full flex justify-center p-2 bg-sky-900 text-white"
               >
                 {searching ? (
                   <AiOutlineLoading3Quarters

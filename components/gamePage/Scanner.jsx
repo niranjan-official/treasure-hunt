@@ -1,13 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import QrScanner from "qr-scanner";
 
-const Scanner = ({qrData, setIsScannerOn}) => {
+const Scanner = ({qrData, setIsScannerOn, setScanSuccess}) => {
   const scanner = useRef();
   const videoEl = useRef(null);
   const qrBoxEl = useRef(null);
   const [qrOn, setQrOn] = useState(true);
-
-  const [scannedResult, setScannedResult] = useState("");
 
   const onScanSuccess = (result) => {
     console.log(result);
@@ -15,6 +13,7 @@ const Scanner = ({qrData, setIsScannerOn}) => {
     if(result.data === qrData){
         console.log("QR DATA MATCHED");
         setIsScannerOn(false);
+        setScanSuccess(true);
     }
   };
 
