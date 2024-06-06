@@ -2,7 +2,6 @@ import Image from "next/image";
 import React from "react";
 import treasureBox from "../public/images/login.svg";
 import NavButtons from "@/components/home/NavButtons";
-import { auth } from "@clerk/nextjs/server";
 
 const Home = () => {
 
