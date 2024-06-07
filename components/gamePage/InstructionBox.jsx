@@ -31,7 +31,7 @@ const InstructionBox = ({ open, gameData, startFunction }) => {
   } else {
     return (
       <AlertDialog open={open}>
-        <AlertDialogContent className="border-0 bg-slate-200 text-bg-sky-950 ">
+        <AlertDialogContent className="border-0 bg-white text-bg-sky-950 ">
           <AlertDialogHeader>
             <AlertDialogTitle>Instructions</AlertDialogTitle>
             <div className="flex">
@@ -46,7 +46,7 @@ const InstructionBox = ({ open, gameData, startFunction }) => {
             <AlertDialogAction
               disabled={isLoading}
               onClick={handleStart}
-              className="bg-sky-900 text-white"
+              className="bg-secondary hover:bg-secondary-dark  text-white"
             >
               {isLoading ? (
                 <AiOutlineLoading3Quarters className="animate-spin" size={20} />

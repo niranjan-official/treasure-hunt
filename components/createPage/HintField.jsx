@@ -20,7 +20,7 @@ const HintField = ({ value, handleChange, index }) => {
         name="qr"
         value={value.qr}
         onChange={(e) => handleChange(e, index)}
-        className="w-full ml-2 bg-transparent pb-2 border-b-2 border-[#5601c4] focus:outline-none focus:ring-0"
+        className="w-full ml-2 bg-transparent pb-2 border-b-2 border-secondary-dark focus:outline-none focus:ring-0"
         placeholder="QR data"
       />
     </div>

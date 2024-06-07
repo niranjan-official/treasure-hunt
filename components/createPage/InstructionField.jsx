@@ -10,7 +10,7 @@ const InstructionField = ({ value, handleChange, index }) => {
         onChange={(e) => handleChange(e, index)}
         placeholder="Enter your instruction"
         type="text"
-        className="pb-2 border-b-2 border-secondary"
+        className="pb-2 border-b-2 border-secondary-dark"
       />
     </div>
   );

@@ -30,6 +30,7 @@ module.exports = {
         secondary: {
           DEFAULT: "#7000ff",
           foreground: "hsl(var(--secondary-foreground))",
+          dark: '#5601c4'
         },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",

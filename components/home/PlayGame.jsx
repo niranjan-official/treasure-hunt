@@ -81,7 +81,7 @@ const PlayGame = ({ SearchGameId }) => {
               </div>
               <Link
                 href={`/game/${gameDetails?.gameId}`}
-                className="mt-6 w-full flex justify-center p-3 bg-secondary text-white rounded-lg shadow hover:bg-blue-700 transition-all duration-300"
+                className="mt-6 w-full flex justify-center p-3 bg-secondary hover:bg-secondary-dark text-white rounded-lg shadow hover:bg-blue-700 transition-all duration-300"
               >
                 Join Game
               </Link>
@@ -116,7 +116,7 @@ const PlayGame = ({ SearchGameId }) => {
               <button
                 disabled={searching}
                 onClick={handleSearch}
-                className="w-full flex justify-center p-2 bg-secondary text-white"
+                className="w-full flex justify-center p-2 bg-secondary hover:bg-secondary-dark text-white"
               >
                 {searching ? (
                   <AiOutlineLoading3Quarters

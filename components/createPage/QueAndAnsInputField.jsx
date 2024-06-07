@@ -18,7 +18,7 @@ const QueAndAnsInputField = ({ value, handleChange, index }) => {
         value={value.answer}
         onChange={(e) => handleChange(e, index)}
         name="answer"
-        className="w-full ml-2 bg-transparent pb-2 border-b-2 border-[#5601c4] focus:outline-none focus:ring-0"
+        className="w-full ml-2 bg-transparent pb-2 border-b-2 border-secondary-dark focus:outline-none focus:ring-0"
         placeholder="Answer"
       />
     </div>
