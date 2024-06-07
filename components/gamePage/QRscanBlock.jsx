@@ -37,7 +37,7 @@ const QRscanBlock = ({currentLevelData}) => {
   };
 
   return (
-    <div className="w-3/4 aspect-square border-2 border-sky-900 border-dashed">
+    <div className="w-3/4 aspect-square border-2 border-secondary border-dashed rounded-[0.7rem]">
       {isScannerOn ? (
         <>
         <Scanner qrData={currentLevelData.qr} setScanSuccess={setScanSuccess} setIsScannerOn={setIsScannerOn}/>
@@ -46,10 +46,10 @@ const QRscanBlock = ({currentLevelData}) => {
         <div className="w-full h-full flex justify-center items-center rounded-[0.5rem]">
           <button
             onClick={() => setIsScannerOn(true)}
-            className="flex items-center gap-2 text-sky-900"
+            className="flex flex-col items-center gap-2"
           >
-            <BsQrCodeScan size={40} />
-            <span className="text-4xl font-bold">Scan</span>
+            <BsQrCodeScan size={60} />
+            <span className="text-3xl font-bold">Scan</span>
           </button>
         </div>
       )}

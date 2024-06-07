@@ -46,7 +46,7 @@ const QrData = () => {
         ))}
         <button
           onClick={addHintField}
-          className="w-full flex justify-center items-center py-2 bg-sky-700 text-white rounded-[0.7rem] font-semibold transition-transform duration-300 ease-in-out"
+          className="w-full flex justify-center items-center py-2 bg-secondary text-white rounded-[0.7rem] font-semibold transition-transform duration-300 ease-in-out"
         >
           <IoIosAdd size={30} /> Add Hint
         </button>

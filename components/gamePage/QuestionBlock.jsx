@@ -35,7 +35,7 @@ const QuestionBlock = ({ open, question, answer, updateLevelCompletion }) => {
 
   return (
     <AlertDialog open={open}>
-      <AlertDialogContent className="border-0 bg-slate-200">
+      <AlertDialogContent className="border-0 bg-white">
         <div className="w-full flex flex-col gap-4">
           <p>{question}</p>
           <input
@@ -49,7 +49,7 @@ const QuestionBlock = ({ open, question, answer, updateLevelCompletion }) => {
         <AlertDialogFooter>
           <AlertDialogAction
             onClick={handleSubmit}
-            className="text-white bg-green-500 hover:bg-green-700 p-2 px-4 rounded-[0.3rem]"
+            className="text-white bg-secondary p-2 px-4 rounded-[0.3rem]"
           >
             {
                 isLoading ? (

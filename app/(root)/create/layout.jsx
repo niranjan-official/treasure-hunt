@@ -3,7 +3,7 @@ import React from "react";
 
 const layout = ({ children }) => {
   return (
-    <div className="min-h-screen w-full flex flex-col bg-slate-200">
+    <div className="min-h-screen w-full flex flex-col bg-white">
       <Header />
       {children}
     </div>

@@ -117,9 +117,9 @@ const page = async ({ params }) => {
   }
 
   return (
-    <div className="w-full min-h-screen flex flex-col items-center justify-around bg-slate-200">
+    <div className="w-full min-h-screen flex flex-col items-center justify-around ">
       <div className="w-full flex flex-col p-4">
-        <div className="flex flex-col bg-sky-700 text-white p-3 rounded-[0.5rem]">
+        <div className="flex flex-col bg-secondary text-white p-3 rounded-[0.5rem]">
           {currentLevelData && (
             <span className="text-3xl font-bold">
               Level: {currentLevelData.level}

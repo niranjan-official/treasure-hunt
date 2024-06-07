@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 .basic-input-field input{
-    @apply w-full bg-transparent pb-2 border-b-2 border-sky-900 focus:outline-none focus:ring-0
+    @apply w-full bg-transparent p-2 rounded-[0.3rem] border border-gray-400 focus:outline-none focus:ring-0
 }

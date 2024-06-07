@@ -17,16 +17,15 @@ const AlertBox = ({ open, heading, gameToken }) => {
   return (
     <div>
       <AlertDialog open={open}>
-        <AlertDialogContent className="bg-slate-200 border-0 text-sky-950 focus:outline-none focus:ring-0">
+        <AlertDialogContent className="bg-white border-0 focus:outline-none focus:ring-0">
           <AlertDialogHeader className={"flex flex-col items-center"} > 
-          <IoMdCheckmarkCircleOutline size={50} className="text-950"/>
+          <IoMdCheckmarkCircleOutline size={50} className="text-secondary"/>
             <AlertDialogTitle>{heading}</AlertDialogTitle>
-          
-              <div className="flex flex-col items-center mt-4">
+              <div className="flex flex-col items-center mt-2">
                 <span>Game Token: </span>
-                <div className="flex text-3xl mt-2">
+                <div className="flex gap-1 text-3xl mt-2">
                   {digits.map((digit, index) => (
-                    <span key={index} className="border border-black tabular-nums px-2 py-1">
+                    <span key={index} className="border border-black text-violet-900 font-semibold tabular-nums px-2 py-1">
                       {digit}
                     </span>
                   ))}
@@ -35,7 +34,7 @@ const AlertBox = ({ open, heading, gameToken }) => {
           
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogAction onClick={()=>Router.push('/')} className={"flex gap-1 items-center bg-sky-900 text-white rounded-[0.3rem]"}>Go To Home Page <VscDebugContinue size={20} /></AlertDialogAction>
+            <AlertDialogAction onClick={()=>Router.push('/')} className={"flex gap-1 items-center bg-secondary text-white rounded-[0.3rem]"}>Go To Home Page <VscDebugContinue size={20} /></AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

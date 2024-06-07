@@ -67,12 +67,12 @@ const Stepper = ({ prev, next, submit, triggerFunction }) => {
   };
 
   return (
-    <div className="fixed w-full bottom-0 rounded-[0.5rem] border-t border-gray-400 bg-slate-200 p-2">
+    <div className="fixed w-full bottom-0 rounded-[0.5rem] border-t border-gray-400 p-2 bg-white">
       <div className="w-full flex text-white gap-2">
         {prev && (
           <button
             onClick={handlePrev}
-            className="p-3 px-5 rounded-[0.4rem] bg-sky-900"
+            className="p-3 px-5 rounded-[0.4rem] bg-secondary"
           >
             <FaArrowLeft size={25} />
           </button>
@@ -80,7 +80,7 @@ const Stepper = ({ prev, next, submit, triggerFunction }) => {
         {next && (
           <button
             onClick={handleNext}
-            className="w-full flex justify-center p-3 rounded-[0.4rem] bg-sky-900 font-semibold"
+            className="w-full flex justify-center p-3 rounded-[0.4rem] bg-secondary font-semibold"
           >
             Next
           </button>
@@ -89,7 +89,7 @@ const Stepper = ({ prev, next, submit, triggerFunction }) => {
           <button
             disabled={isSubmitted}
             onClick={handleSubmit}
-            className="w-full flex justify-center items-center p-3 rounded-[0.4rem] bg-sky-900 font-semibold"
+            className="w-full flex justify-center items-center p-3 rounded-[0.4rem] bg-secondary font-semibold"
           >
             {isSubmitted ? (
               <AiOutlineLoading3Quarters className="animate-spin" size={20} />
