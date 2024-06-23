@@ -5,6 +5,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import { MdGames } from "react-icons/md";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import AlertBox from "./AlertBox";
+import { checkDataSufficiency } from "@/helpers/create-page/create";
 
 const Stepper = ({ prev, next, submit, triggerFunction }) => {
   const { gameData, incrementPageStep, decrementPageStep, refreshGameData } =
@@ -32,15 +33,11 @@ const Stepper = ({ prev, next, submit, triggerFunction }) => {
   };
 
   const createGame = async () => {
-    const { qrData, questionsAnswers, basicData } = gameData;
 
-    if (
-      qrData.length < basicData.levels ||
-      questionsAnswers.length < basicData.levels
-    ) {
-      alert(
-        "The number of QR data and question/answers should be at least the number of levels."
-      );
+    const sufficientData = checkDataSufficiency(gameData);
+
+    if(!sufficientData.isValid){
+      alert(sufficientData.message);
       setIsSubmitted(false);
       return;
     }

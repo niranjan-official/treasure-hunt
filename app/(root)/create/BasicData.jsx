@@ -1,6 +1,5 @@
 import Stepper from "@/components/createPage/Stepper";
 import useGameCreationStore from "@/hooks/useGameCreationStore";
-import Image from "next/image";
 import React, { useState } from "react";
 
 const BasicData = () => {
@@ -48,14 +47,6 @@ const BasicData = () => {
           type="text"
           placeholder="No: of levels"
           className=""
-        />
-      </div>
-      <div className="w-full px-4">
-        <Image
-          src={"/images/treasure.svg"}
-          width={400}
-          height={400}
-          style={{ width: "100%", height: "auto" }}
         />
       </div>
       <Stepper next={true} triggerFunction={basicDataUpdation} />

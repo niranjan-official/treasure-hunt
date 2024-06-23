@@ -19,7 +19,7 @@ const Home = () => {
         <div className="w-full h-1/2 flex flex-col p-3 pt-0">
           <div className="relative -top-12">
             <h1 className="text-6xl font-serif text-center text-white mt-3 mb-7">
-              Treasure Hunt
+              OBSCURA
             </h1>
             <NavButtons/>
           </div>

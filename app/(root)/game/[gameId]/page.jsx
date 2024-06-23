@@ -1,8 +1,6 @@
 import InstructionBox from "@/components/gamePage/InstructionBox";
 import QRscanBlock from "@/components/gamePage/QRscanBlock";
 import { currentUser } from "@clerk/nextjs/server";
-import { Span } from "next/dist/trace";
-import React from "react";
 
 const getGameData = async (gameId, userId) => {
   try {
@@ -117,7 +115,7 @@ const page = async ({ params }) => {
   }
 
   return (
-    <div className="w-full min-h-screen flex flex-col items-center justify-around ">
+    <div className="w-full flex flex-1 flex-col items-center justify-around ">
       <div className="w-full flex flex-col p-4">
         <div className="flex flex-col bg-secondary text-white p-3 rounded-[0.5rem]">
           {currentLevelData && (
@@ -130,7 +128,6 @@ const page = async ({ params }) => {
         </div>
       </div>
       <QRscanBlock currentLevelData={currentLevelData} />
-      <div></div>
     </div>
   );
 };

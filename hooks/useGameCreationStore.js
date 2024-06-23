@@ -33,6 +33,10 @@ const useGameCreationStore = create((set) => ({
     set((state) => ({
       pageStep: state.pageStep - 1,
     })),
+    updateGameData: (gameData) =>
+      set(() => ({
+        gameData: gameData,
+      })),
   updateBasicData: (basicData) =>
     set((state) => ({
       gameData: { ...state.gameData, basicData },

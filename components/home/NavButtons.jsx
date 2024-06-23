@@ -45,6 +45,11 @@ const NavButtons = () => {
           <RiChatHistoryFill size={20} className="text-black" /> Past Games
         </button>
       </Link>
+      <Link href="/signup">
+        <button className="w-full flex items-center gap-2 justify-center p-3 rounded-3xl shadow-md bg-black text-white">
+          <RiChatHistoryFill size={20} className="text-white" /> How to play
+        </button>
+      </Link>
     </div>
   );
 };
