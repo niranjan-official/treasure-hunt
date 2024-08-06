@@ -15,7 +15,7 @@ const Header = ({ UserName }) => {
         });
     }
     return (
-        <div className='w-full p-2 flex justify-between items-center pt-3 pb-3 shadow-2xl fixed'>
+        <div className='w-full p-2 flex justify-between items-center pt-3 pb-3 shadow fixed z-50'>
             <h1 className='text-2xl text-orange-950 font-semibold font-serif '>Treasure-Hunt</h1>
             <div className='flex'>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 text-orange-950">

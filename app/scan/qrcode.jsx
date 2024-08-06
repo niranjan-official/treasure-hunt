@@ -1,42 +1,42 @@
-'use client'
-import { Html5QrcodeScanner } from 'html5-qrcode'
-import { useRouter } from 'next/navigation';
-import React, { useEffect } from 'react'
-import { useGlobalContext } from '../context';
+"use client";
+import { Html5QrcodeScanner } from "html5-qrcode";
+import { useRouter } from "next/navigation";
+import React, { useEffect } from "react";
 
-const Qrcode = ({qr}) => {
-   
-    const Router = useRouter();
-    const { setScan } = useGlobalContext()
-    useEffect(() => {
-        const scanner = new Html5QrcodeScanner('reader', {
-            qrbox: {
-                width: 100,
-                height: 100
-            },
-            fps: 50,
-        })
-        scanner.render(success, error);
+const Qrcode = ({ qr, setTrigger }) => {
 
-        function success(result) {
-            if (result === qr) {
-                scanner.clear();
-                setScan(true);
-                Router.push("/question")
-            } else {
-                alert("Try Again !!!")
-            }
-        }
-        function error(err) {
-            console.log(err);
-        }
-    }, [])
-    return (
-        <div>
-            <div id='reader' className='flex flex-col gap-2 items-center justify-center font-serif p-4'></div>
-        </div>
+  const Router = useRouter();
 
-    )
-}
+  useEffect(() => {
+    const scanner = new Html5QrcodeScanner("reader", {
+      qrbox: {
+        width: 100,
+        height: 100,
+      },
+      fps: 50,
+    });
+    scanner.render(success, error);
 
-export default Qrcode
+    function success(result) {
+      if (result === qr) {
+        scanner.clear();
+        setTrigger(true);
+      } else {
+        alert("Try Again !!!");
+      }
+    }
+    function error(err) {
+      console.log(err);
+    }
+  }, []);
+  return (
+    <div>
+      <div
+        id="reader"
+        className="flex flex-col gap-2 items-center justify-center font-serif p-4"
+      ></div>
+    </div>
+  );
+};
+
+export default Qrcode;

@@ -4,6 +4,7 @@ import { createContext, useContext, useState } from 'react';
 const UserContext = createContext();
 
 export function UserDetails({ children }) {
+  
   const [load, setLoad] = useState(false);
   const [scan, setScan] = useState(false);
 

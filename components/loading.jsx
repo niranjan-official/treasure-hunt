@@ -1,15 +1,14 @@
-import Image from 'next/image'
-import React from 'react'
-import loading from './loading.gif'
+import React from "react";
+import { AiOutlineLoading } from "react-icons/ai";
 
 const Loading = () => {
   return (
-    <div className='h-screen primary-bg justify-center items-center'>
-      <div className='flex justify-center items-center p-10 rounded-xl bg-white'>
-        <Image src={loading} height={100} width={100} alt='loading' />
+    <div className="h-screen w-full flex justify-center items-center login">
+      <div className="flex justify-center items-center p-10 rounded-xl">
+        <AiOutlineLoading size={40} className="animate-spin" />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Loading
+export default Loading;

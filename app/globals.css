@@ -6,11 +6,11 @@
   background-color: #090091;
 }
 .input {
-  @apply w-full p-2 rounded-xl mt-4 border-b-2 border-b-orange-950 focus:outline-none placeholder:text-orange-900 placeholder:text-opacity-50
+  @apply w-full p-2 rounded-xl mt-4 bg-orange-950/20 shadow shadow-orange-950 focus:outline-none placeholder:text-orange-950/60 placeholder:text-opacity-50
 }
 
 .button {
-  @apply p-3 text-white bg-orange-950 font-semibold rounded-xl mt-5 font-serif hover:bg-green-950
+  @apply flex justify-center items-center p-3 py-2 text-white bg-orange-950 font-semibold rounded-xl mt-5 font-serif shadow
 }
 
 .primary-bg {
@@ -21,7 +21,7 @@ input:checked {
   background-color: green;
 }
 .login{
-  background: url("/images/bg.svg");
+  background: url("/images/bg.jpg");
   background-size: cover;
   background-repeat: no-repeat;
 }

@@ -8,6 +8,7 @@ import Loading from '../../components/loading';
 import Header from '../../components/header';
 import Image from 'next/image';
 import qmark from "../../public/images/qmark.png"
+
 const Question = () => {
 
   const [que, setQue] = useState({ question: "", answer: "", userName: "" })
@@ -21,9 +22,10 @@ const Question = () => {
     if (!scan) {
       router.push("/scan");
     } else {
-      setScan(false)
+      setScan(false);
     }
   }, [])
+
   useEffect(() => {
     setLoad(true)
     const fetchQuestion = async () => {
@@ -57,7 +59,7 @@ const Question = () => {
   if (User) {
     if (!load) {
       return (
-        <div className='h-screen flex flex-col login items-center'>
+        <div className='h-screen flex flex-col login items-center relative'>
           <Header UserName={que.userName} />
           <div className='h-full primary-bg p-4 justify-center items-center'>
             <div className='lg:w-1/2 w-full bg-white rounded-md p-4 flex flex-col shadow-inner shadow-orange-950'>
@@ -66,8 +68,8 @@ const Question = () => {
               <button onClick={handleSubmit} className='mt-4 button shadow-md'>Submit</button>
             </div>
           </div>
-            <div className='h-1/3 absolute bottom-0'>
-            <Image src={qmark} width={0} height={0} alt='qmark' style={{ height: "100%", width: "100%" }} />
+            <div className='h-1/4 absolute bottom-0'>
+            <Image src={qmark} width={100} height={100} alt='qmark' style={{ height: "100%", width: "100%" }} />
             </div>
         </div>
       )
