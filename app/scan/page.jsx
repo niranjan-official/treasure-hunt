@@ -82,21 +82,23 @@ const Scan = () => {
           ) : check ? (
             <span className="text-center">Checking your QR....</span>
           ) : (
-            <div className="h-3/5 p-4 flex flex-col justify-center items-center b-1">
-              <div className="w-full bg-orange-100 rounded-xl pt-2 pb-8 shadow-inner shadow-orange-950">
+            <div className="p-4 w-full flex flex-col justify-center items-center mx-8">
+              <div className="w-full bg-orange-100 rounded-xl shadow shadow-orange-950">
                 <h3 className="text-lg text-orange-950 p-3 rounded-xl mt-3">
-                  Hint: {hint.hint}
+                  &quot;{hint.hint}&quot;
                 </h3>
               </div>
-              <div className="relative -top-6 h-auto w-4/5 bg-orange-200 rounded-xl shadow-inner shadow-orange-950 p-3">
+              <div className=" w-4/5 mt-4 bg-orange-200 rounded-xl shadow-inner shadow-orange-950 p-3">
                 <Qrcode qr={hint.qr} setTrigger={setTrigger} />
               </div>
             </div>
           )}
         </div>
-        <h1 className="text-2xl bg-orange-100 p-1 rounded-lg shadow-inner shadow-orange-950 text-orange-950 absolute left-3 top-16 font-serif">
-          Level: {hint.level}
-        </h1>
+        {!load && (
+          <span className="text-2xl flex items-center justify-center w-fit bg-orange-100 p-1 rounded-lg shadow shadow-orange-950 text-orange-950 absolute left-3 top-16 font-serif">
+            Level: {hint.level}
+          </span>
+        )}
       </div>
     );
   }
