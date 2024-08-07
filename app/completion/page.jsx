@@ -10,7 +10,7 @@ const Complete = () => {
         <Image src={'/images/murder.png'} width={250} height={200} alt='trophy' style={{ height: "100%", width: "100%"}} />
       </div>
       <h1>Congratulations</h1>
-      <h2 className='text-md'>You have completed Day 1</h2>
+      <h2 className='text-sm'>You have completed Day 1</h2>
       <h2 className='text-xs'>The Real Story Begins Tomorrow</h2>
     </div>
   )
