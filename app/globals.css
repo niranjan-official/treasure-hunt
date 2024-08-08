@@ -10,18 +10,23 @@
 }
 
 .button {
-  @apply flex justify-center items-center p-3 py-2 text-white bg-orange-950 font-semibold rounded-xl mt-5 font-serif shadow
+  @apply flex justify-center items-center p-3 py-2 text-white bg-red-950 disabled:bg-red-950/80 font-semibold rounded-xl mt-5 font-serif shadow
 }
 
 .primary-bg {
   @apply w-screen flex flex-col 
 }
 
+.reader__dashboard_section{
+  display: flex;
+  flex-direction: column;
+}
+
 input:checked {
   background-color: green;
 }
 .login{
-  background: url("/images/bg.jpg");
+  background: url("/images/crime.jpg");
   background-size: cover;
   background-repeat: no-repeat;
 }

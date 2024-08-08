@@ -8,7 +8,6 @@ import { useAuth } from "@/firebase/auth";
 import { useGlobalContext } from "../context";
 import { AiOutlineLoading } from "react-icons/ai";
 import Image from "next/image";
-import map from "../../public/images/map.png";
 import Loading from "@/components/loading";
 import { IoWarning } from "react-icons/io5";
 
@@ -37,7 +36,7 @@ const Instruction = () => {
 
   const handleStart = async () => {
     setButtonLoad(true);
-    const path = shuffle("abcdefghij");
+    const path = shuffle("abcd");
     const array = path.split("");
     const washingtonRef = doc(db, "users", User.email);
     try {
@@ -58,22 +57,22 @@ const Instruction = () => {
   if (User) {
     return (
       <div className=" min-h-screen primary-bg p-4 pb-0 pt-0 login">
-        <div className="flex flex-col p-4 rounded-lg lg:w-1/2 w-full text-orange-900 text-sm">
-          <div className="w-full flex justify-center items-center gap-1 text-orange-950">
+        <div className="flex flex-col p-4 rounded-lg lg:w-1/2 w-full text-sm">
+          <div className="w-full flex justify-center items-center gap-1 text-white">
             <IoWarning size={30} />
             <h1 className="text-3xl text-center font-bold uppercase">Instructions</h1>
           </div>
-          <div className="w-dull h-1/3">
+          <div className="w-full">
             <Image
-              src={map}
-              width={0}
-              height={0}
+              src={'/images/handprint.png'}
+              width={200}
+              height={200}
               alt="map"
               style={{ height: "100%", width: "100%" }}
             />
           </div>
-          <div className="text-xs font-medium">
-            <h5 className="mt-4">
+          <div className="text-xs font-medium text-white">
+            <h5>
               • Use the QR code scanner to scan QR codes placed around the
               campus. Pay attention to the instructions or content provided when
               scanning QR codes.
@@ -105,7 +104,7 @@ const Instruction = () => {
               placed for a fair and challenging game.
             </h5>
           </div>
-          <button disabled={buttonLoad} onClick={handleStart} className="button">
+          <button disabled={buttonLoad} onClick={handleStart} className="w-full flex justify-center font-medium bg-red-800 text-white rounded-3xl p-2 shadow-md mt-4">
             {buttonLoad ? (
               <AiOutlineLoading size={20} className="animate-spin" />
             ) : (

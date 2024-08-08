@@ -28,9 +28,9 @@ export default function Home() {
     <div className="h-screen primary-bg login justify-center items-center">
       <form
         onSubmit={handleSubmit}
-        className="p-8 flex flex-col items-center rounded-md"
+        className="p-8 flex flex-col items-center bg-white bg-opacity-25 backdrop-blur-md rounded-lg shadow-lg "
       >
-        <h1 className="mb-2 text-5xl font-serif font-bold text-orange-950">
+        <h1 className="mb-2 text-5xl font-serif font-bold text-red-950">
           Login
         </h1>
         <input
@@ -51,11 +51,7 @@ export default function Home() {
           placeholder="Password"
           required
         />
-        <div className="flex w-full justify-between text-xs mt-4 text-orange-950">
-          <div className="flex">
-            <input type="checkbox" className="bg-orange-950" />
-            <span className="ml-1 text-orange-950 font-medium">remember me</span>
-          </div>
+        <div className="flex w-full justify-end text-xs mt-4 text-orange-950">
           <Link href="/signup" className="cursor-pointer ml-8 font-medium">
             Create new Account?
           </Link>

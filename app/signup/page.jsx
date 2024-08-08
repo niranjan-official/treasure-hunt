@@ -27,13 +27,6 @@ export default function Signup() {
         b: false,
         c: false,
         d: false,
-        e: false,
-        f: false,
-        g: false,
-        h: false,
-        i: false,
-        j: false,
-        k: false,
         path: [],
         startTime: new Date(),
         endTime: new Date(),
@@ -48,7 +41,7 @@ export default function Signup() {
       <div className="h-screen primary-bg login justify-center items-center">
         <form
           onSubmit={handleSubmit}
-          className="p-8 flex flex-col items-center rounded-md  "
+          className="p-8 flex flex-col items-center bg-white bg-opacity-25 backdrop-blur-md rounded-lg shadow-lg"
         >
           <h1 className="mb-2 text-5xl font-serif font-bold text-orange-950">
             Sign up
@@ -77,11 +70,7 @@ export default function Signup() {
             placeholder="Password"
             required
           />
-          <div className="flex w-full justify-between text-xs mt-4 text-orange-950">
-            <div className="flex">
-              <input type="checkbox" className="bg-orange-950" />
-              <span className="ml-1 text-orange-950 font-medium">remember me</span>
-            </div>
+          <div className="flex w-full justify-end text-xs mt-4 text-orange-950">
             <Link href="/login" className="cursor-pointer ml-8 text-orange-950 font-medium">
               Already have an account?
             </Link>
