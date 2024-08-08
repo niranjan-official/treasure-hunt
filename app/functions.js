@@ -37,7 +37,7 @@ const handleData = async (email) => {
       const totalTime = endTime / 1000 - startTime;
       await updateDoc(washingtonRef, {
         endTime: endTime,
-        completionTime: totalTime,
+        completionTime: totalTime/60,
       });
       const obj = {
         Name: userData.name,
