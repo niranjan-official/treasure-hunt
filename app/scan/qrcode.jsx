@@ -13,7 +13,7 @@ const Qrcode = ({ qr, setTrigger }) => {
         width: 200,
         height: 200,
       },
-      fps: 50,
+      fps: 100,
     });
     scanner.render(success, error);
 
