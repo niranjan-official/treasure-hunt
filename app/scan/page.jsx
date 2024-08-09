@@ -66,10 +66,10 @@ const Scan = () => {
           {load ? (
             <AiOutlineLoading
               size={40}
-              className="animate-spin mt-5 text-center"
+              className="animate-spin mt-5 text-center text-neutral-100"
             />
           ) : check ? (
-            <span className="text-center">Checking your QR....</span>
+            <span className="text-center text-neutral-100">Checking your QR....</span>
           ) : (
             <div className="p-4 w-full flex flex-col justify-center items-center mx-8 mt-4">
               <div className="flex flex-col text-center text-white">
