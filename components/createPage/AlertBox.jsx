@@ -18,7 +18,7 @@ const AlertBox = ({ open, heading, gameToken, qrCodes }) => {
   const Router = useRouter();
   return (
     <div>
-      <AlertDialog open={true}>
+      <AlertDialog open={open}>
         <AlertDialogContent className="bg-white border-0 focus:outline-none focus:ring-0">
           <AlertDialogHeader className={"flex flex-col items-center"} > 
           <IoMdCheckmarkCircleOutline size={50} className="text-secondary"/>
@@ -26,7 +26,7 @@ const AlertBox = ({ open, heading, gameToken, qrCodes }) => {
               <div className="flex flex-col items-center mt-2">
                 <span>Game Token: </span>
                 <div className="flex gap-1 text-3xl mt-2">
-                  {[1,2,3,4,5,6].map((digit, index) => (
+                  {digits.map((digit, index) => (
                     <span key={index} className="border border-black text-violet-900 font-semibold tabular-nums px-2 py-1">
                       {digit}
                     </span>

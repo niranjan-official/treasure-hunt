@@ -3,22 +3,7 @@ import QRCode from "qrcode";
 import jsPDF from "jspdf";
 import { IoMdDownload } from "react-icons/io";
 
-const qrCodes = [
-    "123123",
-    "123123",
-    "123123",
-    "123123",
-    "123123",
-    "123123",
-    "123123",
-    "123123",
-    "123123",
-    "123123",
-    "123123",
-    "123123",
-];
-
-const DownloadBox = () => {
+const DownloadBox = ({qrCodes}) => {
     const generatePDF = async () => {
         console.log(qrCodes);
 
