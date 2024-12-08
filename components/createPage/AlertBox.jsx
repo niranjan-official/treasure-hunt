@@ -10,13 +10,15 @@ import {
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 import { VscDebugContinue } from "react-icons/vsc";
 import { useRouter } from "next/navigation";
+import DownloadBox from "./DownloadBox";
 
-const AlertBox = ({ open, heading, gameToken }) => {
+
+const AlertBox = ({ open, heading, gameToken, qrCodes }) => {
   const digits = gameToken.toString().split("");
   const Router = useRouter();
   return (
     <div>
-      <AlertDialog open={open}>
+      <AlertDialog open={true}>
         <AlertDialogContent className="bg-white border-0 focus:outline-none focus:ring-0">
           <AlertDialogHeader className={"flex flex-col items-center"} > 
           <IoMdCheckmarkCircleOutline size={50} className="text-secondary"/>
@@ -24,7 +26,7 @@ const AlertBox = ({ open, heading, gameToken }) => {
               <div className="flex flex-col items-center mt-2">
                 <span>Game Token: </span>
                 <div className="flex gap-1 text-3xl mt-2">
-                  {digits.map((digit, index) => (
+                  {[1,2,3,4,5,6].map((digit, index) => (
                     <span key={index} className="border border-black text-violet-900 font-semibold tabular-nums px-2 py-1">
                       {digit}
                     </span>
@@ -35,6 +37,7 @@ const AlertBox = ({ open, heading, gameToken }) => {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogAction onClick={()=>Router.push('/')} className={"flex gap-1 items-center bg-secondary text-white rounded-[0.3rem]"}>Go To Home Page <VscDebugContinue size={20} /></AlertDialogAction>
+            <DownloadBox qrCodes={qrCodes}/>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

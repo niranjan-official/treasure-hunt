@@ -12,6 +12,7 @@ const Stepper = ({ prev, next, submit, triggerFunction }) => {
     useGameCreationStore();
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [gameToken, setGameToken] = useState("");
+  const [qrCodes, setQRcodes] = useState([]);
 
   useEffect(() => {
     if (isSubmitted) {
@@ -55,6 +56,8 @@ const Stepper = ({ prev, next, submit, triggerFunction }) => {
       if (res.ok) {
         const response = await res.json();
         setGameToken(response.randomToken);
+        const qrValues = gameData.qrData.map(item => item.qr);
+        setQRcodes(qrValues)
         refreshGameData();
       }
     } catch (error) {
@@ -102,6 +105,7 @@ const Stepper = ({ prev, next, submit, triggerFunction }) => {
         open={gameToken ? true : false}
         heading={"Game created successfully !"}
         gameToken={gameToken}
+        qrCodes={qrCodes}
       />
     </div>
   );

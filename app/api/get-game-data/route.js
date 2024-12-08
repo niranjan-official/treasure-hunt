@@ -7,6 +7,8 @@ export const dynamic = "force-dynamic";
 export async function GET(req) {
   try {
     const url = new URL(req.url);
+    console.log(url);
+    
     const params = new URLSearchParams(url.searchParams);
 
     const gameId = Number(params.get("gameId"));
@@ -26,9 +28,9 @@ export async function GET(req) {
 
     return NextResponse.json({ gameStatus });
   } catch (error) {
-    console.error("Error fetching game data:", error);
+    console.error("Error fetching game data:", error.message);
     return NextResponse.json(
-      { error: "Internal Server Error" },
+      { error: error.message },
       { status: 500 }
     );
   }

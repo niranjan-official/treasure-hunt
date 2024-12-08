@@ -12,11 +12,11 @@ const getGameData = async (gameId, userId) => {
       }
     );
 
+    const data = await res.json();
     if (res.ok) {
-      const data = await res.json();
       return data.gameStatus;
     } else {
-      console.error("Error Occurred: ", res);
+      console.error("Error Occurred: ", data.error);
     }
   } catch (error) {
     console.error("Error fetching game data: ", error);
@@ -70,7 +70,7 @@ const page = async ({ params }) => {
 
   if (!userGameStatus) {
     return (
-      <div className="min-h-screen flex flex-col bg-slate-200">
+      <div className="min-h-screen flex flex-col bg-slate-200 pt-16">
         <div className="w-full flex flex-col p-4">
           <div className="flex flex-col bg-red-700 text-white p-3 rounded-[0.5rem]">
             <p>Error fetching game status. Please try again.</p>
