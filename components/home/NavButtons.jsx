@@ -40,9 +40,9 @@ const NavButtons = () => {
           Game
         </button>
       </Link>
-      <Link href="/signup">
+      <Link href="/edit-games">
         <button className="w-full flex items-center gap-2 justify-center p-3 rounded-3xl shadow-md bg-slate-200 text-black">
-          <RiChatHistoryFill size={20} className="text-black" /> Past Games
+          <RiChatHistoryFill size={20} className="text-black" /> Your Games
         </button>
       </Link>
       <Link href="/signup">
