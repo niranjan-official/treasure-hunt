@@ -2,31 +2,470 @@
 @tailwind components;
 @tailwind utilities;
 
-.bg-color{
+/* Rushblade Font */
+@font-face {
+  font-family: 'Rushblade';
+  src: url('/fonts/Rushblade.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Title Styles */
+.title-font {
+  font-family: 'Rushblade', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 10px rgba(220, 38, 38, 0.7);
+  line-height: 1.1;
+}
+
+.title-font-glow {
+  text-shadow: 0 0 3px rgba(220, 38, 38, 0.5), 
+               0 0 6px rgba(220, 38, 38, 0.3),
+               0 0 12px rgba(220, 38, 38, 0.15);
+  animation: pulse-glow 3s ease-in-out infinite alternate;
+}
+
+/* Stranger Things-inspired dark cinematic theme with red/black palette and CRT effects */
+:root {
+  --background: oklch(0.08 0 0);
+  --foreground: oklch(0.95 0.03 0);
+  --card: oklch(0.12 0.01 0);
+  --card-foreground: oklch(0.92 0.03 0);
+  --popover: oklch(0.1 0.01 0);
+  --popover-foreground: oklch(0.95 0.03 0);
+  --primary: oklch(0.55 0.24 25);
+  --primary-foreground: oklch(0.98 0.01 0);
+  --secondary: oklch(0.15 0.01 0);
+  --secondary-foreground: oklch(0.92 0.03 0);
+  --muted: oklch(0.2 0.01 0);
+  --muted-foreground: oklch(0.55 0.02 0);
+  --accent: oklch(0.55 0.24 25);
+  --accent-foreground: oklch(0.98 0.01 0);
+  --destructive: oklch(0.5 0.22 25);
+  --destructive-foreground: oklch(0.98 0.01 0);
+  --border: oklch(0.18 0.02 25);
+  --input: oklch(0.15 0.01 0);
+  --ring: oklch(0.55 0.24 25);
+  --signal-red: oklch(0.55 0.24 25);
+  --signal-dim: oklch(0.3 0.12 25);
+  --static-overlay: oklch(0.5 0 0 / 0.03);
+  --interference: oklch(0.95 0.03 0 / 0.08);
+  --radius: 0;
+}
+
+@layer base {
+  * {
+    @apply border-[color:var(--border)];
+  }
+
+  body {
+    @apply bg-[color:var(--background)] text-[color:var(--foreground)];
+    font-feature-settings: "tnum" on, "lnum" on;
+  }
+
+  /* CRT screen effect */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.15),
+      rgba(0, 0, 0, 0.15) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.03;
+  }
+
+  /* Scanline effect */
+  body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.25) 50%);
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 9998;
+    opacity: 0.05;
+    animation: scanline 8s linear infinite;
+  }
+
+  @keyframes scanline {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(4px);
+    }
+  }
+}
+
+@layer utilities {
+  /* Glitch animation */
+  @keyframes glitch {
+    0%,
+    100% {
+      transform: translate(0);
+      opacity: 1;
+    }
+    20% {
+      transform: translate(-2px, 2px);
+      opacity: 0.8;
+    }
+    40% {
+      transform: translate(-2px, -2px);
+      opacity: 0.9;
+    }
+    60% {
+      transform: translate(2px, 2px);
+      opacity: 0.85;
+    }
+    80% {
+      transform: translate(2px, -2px);
+      opacity: 0.95;
+    }
+  }
+
+  .glitch {
+    animation: glitch 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+  }
+
+  /* Signal pulse */
+  @keyframes signal-pulse {
+    0%,
+    100% {
+      opacity: 1;
+      box-shadow: 0 0 5px currentColor, 0 0 10px currentColor;
+    }
+    50% {
+      opacity: 0.6;
+      box-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
+    }
+  }
+
+  .signal-pulse {
+    animation: signal-pulse 2s ease-in-out infinite;
+  }
+
+  /* Flicker */
+  @keyframes flicker {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    41% {
+      opacity: 1;
+    }
+    42% {
+      opacity: 0.6;
+    }
+    43% {
+      opacity: 1;
+    }
+    45% {
+      opacity: 0.8;
+    }
+    46% {
+      opacity: 1;
+    }
+  }
+
+  .flicker {
+    animation: flicker 4s linear infinite;
+  }
+
+  /* Static noise */
+  @keyframes static-noise {
+    0%,
+    100% {
+      background-position: 0% 0%;
+      opacity: 0.03;
+    }
+    10% {
+      opacity: 0.05;
+    }
+    20% {
+      background-position: 5% 10%;
+    }
+    30% {
+      opacity: 0.02;
+    }
+    40% {
+      background-position: 10% 5%;
+    }
+    50% {
+      opacity: 0.04;
+    }
+    60% {
+      background-position: 15% 20%;
+    }
+    70% {
+      opacity: 0.03;
+    }
+    80% {
+      background-position: 20% 15%;
+    }
+    90% {
+      opacity: 0.05;
+    }
+  }
+
+  .static-overlay {
+    position: relative;
+  }
+
+  .static-overlay::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.15'/%3E%3C/svg%3E");
+    pointer-events: none;
+    animation: static-noise 0.2s steps(4, end) infinite;
+    opacity: 0.03;
+  }
+
+  /* Fade in with interference */
+  @keyframes fade-in-interference {
+    0% {
+      opacity: 0;
+      transform: translateY(10px);
+      filter: blur(4px);
+    }
+    50% {
+      opacity: 0.5;
+      filter: blur(2px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+  }
+
+  .fade-in-interference {
+    animation: fade-in-interference 0.6s ease-out forwards;
+  }
+
+  /* Pulse glow effect for emphasis */
+  @keyframes pulse-glow {
+    0%,
+    100% {
+      text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
+    }
+    50% {
+      text-shadow: 0 0 20px currentColor, 0 0 40px currentColor, 0 0 60px currentColor;
+    }
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  /* Fade in up animation */
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.6s ease-out forwards;
+  }
+
+  /* Fade in animation */
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.8s ease-out forwards;
+  }
+
+  /* Expand horizontal for dividers */
+  @keyframes expand-horizontal {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  .animate-expand-horizontal {
+    animation: expand-horizontal 0.8s ease-out forwards;
+  }
+
+  /* Input glow on focus */
+  @keyframes input-glow {
+    0% {
+      box-shadow: 0 0 0 rgba(220, 38, 38, 0);
+    }
+    100% {
+      box-shadow: 0 0 8px rgba(220, 38, 38, 0.3);
+    }
+  }
+
+  .animate-input-glow:focus {
+    animation: input-glow 0.3s ease-out forwards;
+  }
+
+  /* Subtle bounce for success states */
+  @keyframes bounce-subtle {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .animate-bounce-subtle {
+    animation: bounce-subtle 2s ease-in-out infinite;
+  }
+
+  /* Text glow */
+  .text-glow {
+    text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
+  }
+
+  .text-glow-subtle {
+    text-shadow: 0 0 8px currentColor, 0 0 12px currentColor;
+  }
+
+  /* Border glow */
+  .border-glow {
+    box-shadow: 0 0 5px var(--signal-red), 0 0 10px var(--signal-red), inset 0 0 5px var(--signal-red);
+  }
+
+  .border-glow-dim {
+    box-shadow: 0 0 3px var(--signal-dim), inset 0 0 3px var(--signal-dim);
+  }
+}
+
+/* Original utility classes preserved */
+.bg-color {
   background-color: #090091;
 }
+
+/* Stranger Things Themed Input */
 .input {
-  @apply w-full p-2 rounded-xl mt-4 bg-orange-950/20 shadow shadow-orange-950 focus:outline-none placeholder:text-orange-950/60 placeholder:text-opacity-50
+  @apply w-full px-4 py-3 mt-4 font-mono text-sm tracking-wider bg-transparent border-2 border-[var(--border)] rounded-none transition-all duration-300 ease-in-out;
+  color: var(--foreground);
+  box-shadow: 0 0 0 0 transparent, inset 0 0 3px 0 rgba(220, 38, 38, 0.2);
+  position: relative;
+  z-index: 1;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.input::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 100%);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+  font-style: italic;
+  letter-spacing: 0.05em;
+  text-transform: none;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--signal-red);
+  box-shadow: 0 0 8px 0 var(--signal-red), 
+              inset 0 0 5px 0 var(--signal-red);
+  background: rgba(0, 0, 0, 0.5);
+  transform: translateY(-1px);
+}
+
+.input:focus::before {
+  opacity: 1;
+}
+
+/* Input label style */
+.input-label {
+  @apply block text-xs font-mono tracking-widest text-[var(--muted-foreground)] mb-1 transition-all duration-300;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.input-label.focused {
+  color: var(--signal-red);
+  text-shadow: 0 0 5px var(--signal-red);
 }
 
 .button {
-  @apply flex justify-center items-center p-3 py-2 text-white bg-red-950 disabled:bg-red-950/80 font-semibold rounded-xl mt-5 font-serif shadow
+  @apply flex justify-center items-center p-3 py-2 font-semibold rounded-xl mt-5 font-serif disabled:opacity-80 transition-all duration-300;
+  background-color: var(--destructive);
+  color: var(--primary-foreground);
+  box-shadow: 0 10px 15px -3px rgba(140, 50, 50, 0.3);
+}
+
+.button:hover:not(:disabled) {
+  box-shadow: 0 0 5px var(--signal-red), 0 0 10px var(--signal-red), inset 0 0 5px var(--signal-red);
 }
 
 .primary-bg {
-  @apply w-screen flex flex-col 
+  @apply w-screen flex flex-col bg-[color:var(--background)];
 }
 
-.reader__dashboard_section{
+.reader__dashboard_section {
   display: flex;
   flex-direction: column;
 }
 
 input:checked {
-  background-color: green;
+  background-color: var(--signal-red);
 }
-.login{
+
+.login {
   background: url("/images/crime.jpg");
   background-size: cover;
   background-repeat: no-repeat;
+  position: relative;
+}
+
+.login::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  pointer-events: none;
 }
