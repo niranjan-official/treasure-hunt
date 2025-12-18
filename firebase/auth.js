@@ -1,33 +1,27 @@
-"use client"
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { auth } from './config'; 
 
-import { useEffect, useState } from "react"
-import { onAuthStateChanged } from "firebase/auth"
-import { auth } from "./config"
-import { useRouter } from "next/navigation"
-
-export function useAuth() {
-  const [user, setUser] = useState(null)
-  const [loading, setLoading] = useState(true)
-  const router = useRouter()
+export const useAuth = () => {
+  const [user, setUser] = useState(null);
+  const router = useRouter();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser({
-          email: user.email,
-          uid: user.uid,
-        })
-      } else {
-        setUser(null)
-        if (!loading) {
-          router.push("/login")
+
+      const unsubscribe = auth.onAuthStateChanged((user) => {
+        if (user) {
+          setUser(user);
+          localStorage.setItem('user', JSON.stringify(user));
+        } else {
+          setUser(null);
+          localStorage.removeItem('user');
+          router.push('/login');
         }
-      }
-      setLoading(false)
-    })
+      });
 
-    return () => unsubscribe()
-  }, [router, loading])
+      return () => unsubscribe();
+   
+  }, [router]);
 
-  return { user, loading }
-}
+  return user;
+};

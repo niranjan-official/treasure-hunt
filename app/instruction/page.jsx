@@ -1,23 +1,15 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { StaticBackground } from "@/components/static-background"
 import { SignalScanner } from "@/components/signal-scanner"
-import { useAuth } from "@/firebase/auth"
 import Image from "next/image"
 
 export default function Instruction() {
   const [loading, setLoading] = useState(false)
   const [accepted, setAccepted] = useState(false)
   const router = useRouter()
-  const { user, loading: authLoading } = useAuth()
-
-  useEffect(() => {
-    if (!authLoading && !user) {
-      router.push("/login")
-    }
-  }, [user, authLoading, router])
 
   const handleStart = async () => {
     setLoading(true)
@@ -26,22 +18,6 @@ export default function Instruction() {
     setTimeout(() => {
       router.push("/scan")
     }, 2000)
-  }
-
-  if (authLoading) {
-    return (
-      <div className="relative min-h-screen w-full bg-background overflow-hidden flex items-center justify-center">
-        <StaticBackground />
-        <div className="relative z-20 text-center space-y-6">
-          <div className="inline-block w-16 h-16 border-4 border-[#dc2626]/30 border-t-[#dc2626] rounded-full animate-spin" />
-          <p className="text-xs sm:text-sm font-mono tracking-widest text-muted-foreground">AUTHENTICATING...</p>
-        </div>
-      </div>
-    )
-  }
-
-  if (!user) {
-    return null
   }
 
   return (

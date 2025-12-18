@@ -15,7 +15,7 @@ export default function Scan() {
   const [trigger, setTrigger] = useState(false)
   const [check, setCheck] = useState(false)
   const [signalStrength, setSignalStrength] = useState(0)
-  const { user: User, loading: authLoading } = useAuth()
+  const User = useAuth()
 
   const fetchData = async () => {
     setLoad(true)
@@ -67,18 +67,6 @@ export default function Scan() {
 
     return () => clearInterval(interval)
   }, [])
-
-  if (authLoading) {
-    return (
-      <div className="relative min-h-screen w-full bg-background overflow-hidden flex items-center justify-center">
-        <StaticBackground />
-        <div className="relative z-20 text-center space-y-6">
-          <div className="inline-block w-16 h-16 border-4 border-[#dc2626]/30 border-t-[#dc2626] rounded-full animate-spin" />
-          <p className="text-xs sm:text-sm font-mono tracking-widest text-muted-foreground">AUTHENTICATING...</p>
-        </div>
-      </div>
-    )
-  }
 
   if (User) {
     return (
@@ -137,7 +125,7 @@ export default function Scan() {
                       Intercepted Message
                     </span>
                   </div>
-                  <p className="text-xs sm:text-sm md:text-base font-mono leading-relaxed text-foreground/90 tracking-wide">
+                  <p className="text-xs sm:text-sm uppercase md:text-base font-mono leading-relaxed text-foreground/90 tracking-wide">
                     &quot;{hint.hint}&quot;
                   </p>
                 </div>
