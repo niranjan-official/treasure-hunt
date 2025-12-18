@@ -158,6 +158,4 @@ export default function Scan() {
       </div>
     )
   }
-
-  return null
 }
