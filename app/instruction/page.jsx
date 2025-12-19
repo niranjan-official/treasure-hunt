@@ -1,62 +1,81 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { StaticBackground } from "@/components/static-background"
 import { SignalScanner } from "@/components/signal-scanner"
 import Image from "next/image"
 import { useAuth } from "@/firebase/auth"
 import { useGlobalContext } from "../context"
-import { useEffect } from "react"
 import Loading from "@/components/loading" 
-import { getData, shuffle } from "../functions";
-import { doc, updateDoc } from "firebase/firestore";
-import { db } from "@/firebase/config";
+import { getData, shuffle } from "../functions"
+import { doc, updateDoc } from "firebase/firestore"
+import { db } from "@/firebase/config"
 
 export default function Instruction() {
-  const router = useRouter();
-  const { load, setLoad } = useGlobalContext();
-  const [buttonLoad, setButtonLoad] = useState(false);
+  const router = useRouter()
+  const { load, setLoad } = useGlobalContext()
+  const [buttonLoad, setButtonLoad] = useState(false)
+  const [accepted, setAccepted] = useState(false)
 
-  const User = useAuth();
+  const { user: User, loading: authLoading } = useAuth() // Destructure user and loading
 
   useEffect(() => {
-    setLoad(true);
-    const checkUserPath = async () => {
-      const newpath = await getData("users", User.email);
+    // Don't do anything while auth is loading
+    if (authLoading) return
 
-      if (newpath.path.length > 0) {  
-        router.push("/scan");
-      } else {
-        setLoad(false);
+    // If no user after loading, they'll be redirected by useAuth
+    if (!User) return
+
+    setLoad(true)
+    const checkUserPath = async () => {
+      try {
+        const newpath = await getData("users", User.email)
+
+        if (newpath && newpath.path && newpath.path.length > 0) {  
+          router.push("/scan")
+        } else {
+          setLoad(false)
+        }
+      } catch (error) {
+        console.error("Error checking user path:", error)
+        setLoad(false)
       }
-    };
-    if (User) {
-      checkUserPath();
     }
-  }, [User]);
+
+    checkUserPath()
+  }, [User, authLoading, router, setLoad])
 
   const handleStart = async () => {
-    setButtonLoad(true);
-    const path = shuffle("abc");
-    const array = path.split("");
-    const washingtonRef = doc(db, "users", User.email);
+    if (!User) return
+    
+    setButtonLoad(true)
+    const path = shuffle("abc")
+    const array = path.split("")
+    const washingtonRef = doc(db, "users", User.email)
+    
     try {
       await updateDoc(washingtonRef, {
         path: array,
         startTime: new Date(),
-      });
-      router.push("/scan");
+      })
+      router.push("/scan")
     } catch (e) {
-      alert(e.message);
-      console.log(e.message);
-      setButtonLoad(false);
+      alert(e.message)
+      console.log(e.message)
+      setButtonLoad(false)
     }
-  };
-  if(load){
-    return <Loading/>
   }
-  if (User) {
+
+  // Show loading while auth is being determined
+  if (authLoading || load) {
+    return <Loading />
+  }
+
+  // Don't render if no user (useAuth will handle redirect)
+  if (!User) {
+    return <Loading />
+  }
 
   return (
     <div className="relative min-h-screen w-full bg-background overflow-hidden">
@@ -66,7 +85,7 @@ export default function Instruction() {
       <div className="fixed inset-0 pointer-events-none z-10 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.7)_100%)]" />
 
       <div className="relative z-20 min-h-screen flex items-center justify-center p-4 sm:p-6 py-8 sm:py-12">
-        <div className="max-w-2xl w-full space-y-3  fade-in-interference">
+        <div className="max-w-2xl w-full space-y-3 fade-in-interference">
           <div className="text-center space-y-3 sm:space-y-4">
             <div className="flex items-center justify-center gap-2 sm:gap-3 mb-4 sm:mb-6 animate-fade-in">
               <div className="text-xl sm:text-2xl text-[#dc2626] flicker">⚠</div>
@@ -89,7 +108,6 @@ export default function Instruction() {
           </div>
 
           <div className="static-overlay border border-[#dc2626]/30 bg-card/50 backdrop-blur-sm hover:border-glow-dim transition-all duration-300">
-            {/* Image placeholder */}
             <div className="w-full h-48 sm:h-64 bg-background/80 border-b border-[#dc2626]/30 flex items-center justify-center relative overflow-hidden">
               <div className="relative z-10 text-center w-full h-full flex flex-col items-center justify-center p-4">
                 <div className="relative w-full h-full max-w-[300px] max-h-[200px]">
@@ -163,7 +181,7 @@ export default function Instruction() {
 
           <button
             onClick={handleStart}
-            disabled={buttonLoad}
+            disabled={buttonLoad || !accepted}
             className="w-full min-h-[48px] sm:min-h-[52px] p-4 bg-[#dc2626] text-white font-mono text-sm sm:text-base tracking-widest uppercase border border-[#dc2626] hover:bg-[#dc2626]/90 active:scale-[0.98] transition-all duration-200 border-glow disabled:opacity-30 disabled:cursor-not-allowed relative overflow-hidden group"
           >
             {buttonLoad ? (
@@ -183,7 +201,6 @@ export default function Instruction() {
             )}
           </button>
 
-          {/* Warning */}
           <div className="text-center pt-2 sm:pt-4 animate-fade-in">
             <p className="text-[10px] font-mono text-muted-foreground/60 tracking-wide">
               <span className="text-[#dc2626] flicker">⚠</span> ONCE STARTED, THE TIMER CANNOT BE STOPPED{" "}
@@ -194,5 +211,4 @@ export default function Instruction() {
       </div>
     </div>
   )
-}
 }
