@@ -1,64 +1,25 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { StaticBackground } from "@/components/static-background"
 import { SignalScanner } from "@/components/signal-scanner"
 import Image from "next/image"
-import { getData, shuffle } from "../functions"
-import { doc, updateDoc } from "firebase/firestore"
-import { db } from "@/firebase/config"
-import { useAuth } from "@/firebase/auth"
-import { useGlobalContext } from "../context"
-import Loading from "@/components/loading"
 
 export default function Instruction() {
-  const router = useRouter()
-  const { load, setLoad } = useGlobalContext()
-  const [buttonLoad, setButtonLoad] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [accepted, setAccepted] = useState(false)
-
-  const User = useAuth()
-
-  useEffect(() => {
-    setLoad(true)
-    const checkUserPath = async () => {
-      const newpath = await getData("users", User.email)
-
-      if (newpath.path.length > 0) {
-        router.push("/scan")
-      } else {
-        setLoad(false)
-      }
-    }
-    if (User) {
-      checkUserPath()
-    }
-  }, [User])
+  const router = useRouter()
 
   const handleStart = async () => {
-    setButtonLoad(true)
-    const path = shuffle("abc")
-    const array = path.split("")
-    const washingtonRef = doc(db, "users", User.email)
-    try {
-      await updateDoc(washingtonRef, {
-        path: array,
-        startTime: new Date(),
-      })
+    setLoading(true)
+
+    // Simulated path generation - replace with your Firebase logic
+    setTimeout(() => {
       router.push("/scan")
-    } catch (e) {
-      alert(e.message)
-      console.log(e.message)
-      setButtonLoad(false)
-    }
+    }, 2000)
   }
 
-  if (load) {
-    return <Loading />
-  }
-
-  if (User) {
   return (
     <div className="relative min-h-screen w-full bg-background overflow-hidden">
       <StaticBackground />
@@ -164,10 +125,10 @@ export default function Instruction() {
 
           <button
             onClick={handleStart}
-            disabled={!accepted || buttonLoad}
+            disabled={!accepted || loading}
             className="w-full min-h-[48px] sm:min-h-[52px] p-4 bg-[#dc2626] text-white font-mono text-sm sm:text-base tracking-widest uppercase border border-[#dc2626] hover:bg-[#dc2626]/90 active:scale-[0.98] transition-all duration-200 border-glow disabled:opacity-30 disabled:cursor-not-allowed relative overflow-hidden group"
           >
-            {buttonLoad ? (
+            {loading ? (
               <span className="flex items-center justify-center gap-2">
                 <span className="inline-block w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                 <span className="hidden sm:inline">INITIALIZING SCANNER...</span>
@@ -179,7 +140,7 @@ export default function Instruction() {
                 <span className="sm:hidden">BEGIN HUNT</span>
               </span>
             )}
-            {!buttonLoad && accepted && (
+            {!loading && accepted && (
               <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 group-active:translate-y-0 transition-transform duration-300" />
             )}
           </button>
@@ -195,5 +156,4 @@ export default function Instruction() {
       </div>
     </div>
   )
-}
 }

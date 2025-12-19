@@ -9,9 +9,8 @@ import { StaticBackground } from "@/components/static-background"
 import { SignalScanner } from "@/components/signal-scanner"
 
 export default function Scan() {
-  
   const router = useRouter()
-  const [hint, setHint] = useState({})
+  const [hint, setHint] = useState<any>({})
   const [load, setLoad] = useState(true)
   const [trigger, setTrigger] = useState(false)
   const [check, setCheck] = useState(false)
@@ -111,7 +110,7 @@ export default function Scan() {
             ) : (
               <div className="w-full space-y-6 sm:space-y-8 fade-in-interference">
                 <div className="text-center space-y-2 mb-4 animate-pulse-glow">
-                  <div className="text-5xl sm:text-6xl title-font text-[#dc2626] text-glow flicker">
+                  <div className="text-5xl sm:text-7xl title-font text-[#dc2626] text-glow flicker">
                     SIGNAL {hint.level}
                   </div>
                   <div className="text-[10px] sm:text-xs font-mono tracking-widest text-muted-foreground uppercase">
@@ -126,7 +125,7 @@ export default function Scan() {
                       Intercepted Message
                     </span>
                   </div>
-                  <p className="text-xs sm:text-sm uppercase md:text-base font-mono leading-relaxed text-foreground/90 tracking-wide">
+                  <p className="text-xs sm:text-sm md:text-base font-mono leading-relaxed text-foreground/90 tracking-wide">
                     &quot;{hint.hint}&quot;
                   </p>
                 </div>
@@ -159,4 +158,6 @@ export default function Scan() {
       </div>
     )
   }
+
+  return null
 }
