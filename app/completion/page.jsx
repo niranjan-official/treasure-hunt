@@ -32,7 +32,7 @@ export default function Completion() {
           </div>
 
           <div className="static-overlay border border-[#dc2626]/30 bg-card/50 backdrop-blur-sm p-6 sm:p-8 space-y-6 hover:border-glow transition-all duration-300">
-            <div className="grid grid-cols-3 gap-4 sm:gap-6">
+            <div className="flex justify-center items-center">
               <div className="space-y-2">
                 <div className="text-[10px] sm:text-xs font-mono text-muted-foreground tracking-widest uppercase">
                   Signals
