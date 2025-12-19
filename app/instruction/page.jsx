@@ -36,7 +36,7 @@ const Instruction = () => {
 
   const handleStart = async () => {
     setButtonLoad(true);
-    const path = shuffle("abc");
+    const path = shuffle("abcdefg");
     const array = path.split("");
     const washingtonRef = doc(db, "users", User.email);
     try {

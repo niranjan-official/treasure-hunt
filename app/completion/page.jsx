@@ -8,7 +8,7 @@ import { SignalScanner } from "@/components/signal-scanner"
 export default function Completion() {
   const [stats] = useState({
     time: "12:34",
-    signals: 10,
+    signals: 8,
     rank: 3,
   })
 
@@ -35,25 +35,9 @@ export default function Completion() {
             <div className="grid grid-cols-3 gap-4 sm:gap-6">
               <div className="space-y-2">
                 <div className="text-[10px] sm:text-xs font-mono text-muted-foreground tracking-widest uppercase">
-                  Time
-                </div>
-                <div className="text-2xl sm:text-3xl font-bold font-mono text-[#dc2626] text-glow-subtle">
-                  {stats.time}
-                </div>
-              </div>
-              <div className="space-y-2">
-                <div className="text-[10px] sm:text-xs font-mono text-muted-foreground tracking-widest uppercase">
                   Signals
                 </div>
                 <div className="text-2xl sm:text-3xl font-bold font-mono text-foreground">{stats.signals}</div>
-              </div>
-              <div className="space-y-2">
-                <div className="text-[10px] sm:text-xs font-mono text-muted-foreground tracking-widest uppercase">
-                  Rank
-                </div>
-                <div className="text-2xl sm:text-3xl font-bold font-mono text-[#dc2626] text-glow-subtle">
-                  #{stats.rank}
-                </div>
               </div>
             </div>
 

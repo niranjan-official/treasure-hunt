@@ -20,7 +20,7 @@ const shuffle = (inputString) => {
     [array[i], array[j]] = [array[j], array[i]];
   }
   // make the last path fixed
-  return array.join("") + "d";
+  return array.join("") + "h";
 };
 // To fetch hint from firebase based on pathway
 const handleData = async (email) => {
@@ -29,7 +29,7 @@ const handleData = async (email) => {
   const newPath = userData.path;
 
   // If user completed the game, then goto completion page and obtain completion time
-  if (userData[newPath[3]] === true) {
+  if (userData[newPath[7]] === true) {
     try {
       const washingtonRef = doc(db, "users", email);
       const endTime = new Date().getTime();
@@ -52,7 +52,7 @@ const handleData = async (email) => {
     }
   }
   // To find the current pathway level and the particular hint
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < 8; i++) {
     let c = newPath[i];
     if (userData[c] === false) {
       const hint = await getData("hint", c);
@@ -88,7 +88,7 @@ const handleQuestion = async (User) => {
 const handleQuestionSubmit = async (User) => {
   const userData = await getData("users", User.email);
   const newPath = userData.path;
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < 8; i++) {
     let c = newPath[i];
     if (userData[c] === false) {
       try {
