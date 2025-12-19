@@ -10,7 +10,7 @@ import { SignalScanner } from "@/components/signal-scanner"
 
 export default function Scan() {
   const router = useRouter()
-  const [hint, setHint] = useState<any>({})
+  const [hint, setHint] = useState({})
   const [load, setLoad] = useState(true)
   const [trigger, setTrigger] = useState(false)
   const [check, setCheck] = useState(false)
